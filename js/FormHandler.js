@@ -3,7 +3,7 @@ $(document).ready(function() {
     var added = false;
 
     // Look for a click even on the form
-    $('main').on('click', '.form-container', function(e) {
+    $("main").on("click", ".form-container", function(e) {
         
         var screenWidth = $(window).width();
         var background = document.createElement("div");
@@ -12,12 +12,10 @@ $(document).ready(function() {
         var clickedElement = $(e.target);
 
         if (clickedElement.is("input") && screenWidth > 768) {
-            var clickedID = clickedElement[0].id;
-            if (!added && clickedID != 'form-remember') {
+            if (!added) {
                 main.appendChild(background)
                 $(background).fadeIn(300);
-                $('.form-container').css({'border': '1px solid rgba(0, 0, 0, .4)'});
-                $('.form-container').css({'box-shadow': 'none'});
+                $(".form-container").addClass("box-shadow");
                 added = true;
             }
         }
@@ -25,19 +23,14 @@ $(document).ready(function() {
     });
 
     // Look for click even on the form background
-    $('main').on('click', '.greyed-out', function() {
+    $("main").on("click", ".greyed-out", function() {
 
         $(this).fadeOut(300, function() {
             $(this).remove();
-            $('.form-container').css({
-                'box-shadow': '0 1.5rem 5rem -1rem rgba(0, 0, 0, .15)',
-                'border-color': 'rgba(0, 0, 0, .2)'
-            });
+            $(".form-container").removeClass("box-shadow");
         });
         added = false;
 
     });
-
-
 
 });

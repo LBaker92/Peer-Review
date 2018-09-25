@@ -1,10 +1,11 @@
 a {
-    color: #00397680;
+    color: #00397690;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: none;
+    color: #eaab00;
 }
 
 #nav {
@@ -14,45 +15,58 @@ a:hover {
 }
 
 .nav-title {
-    margin: 0 auto;
-    width: 130px;
     font-size: 1.4rem;
     font-weight: bold;
     text-align: center;
     line-height: 2rem;
     color: white;
-    border-bottom: 1px solid #aeeae5;
 }
 
 .nav-title:hover {
-    border-bottom: 1px solid #e5e854;
+    color: white;
+}
+
+.logout-btn {
+    border-radius: 0;
+    background: #aeeae5;
+}
+
+.logout-btn:hover {
+    background: #e5e854;
 }
 
 .form-container {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 500px;
-    padding: 1rem;
+    width: 350px;
+    padding: 2rem;
     color: #003976;
     background: white;
-    border-radius: .5rem;
-    border: 1px solid rgba(0, 0, 0, .2);
-    box-shadow: 0 1.5rem 5rem -1rem rgba(0, 0, 0, .15);
     z-index: 1;
+    box-shadow: 0 0 3rem rgba(0, 0, 0, .3);
     transform: translate(-50%, -50%);
-    transition: border linear 300ms;
-    transition: box-shadow linear 300ms;
+    transition: all 300ms ease;
+}
+
+.box-shadow {
+    box-shadow: 0 0 3rem .5rem rgba(0, 0, 0, .3);
 }
 
 .form-control {
     border-radius: 0;
-    background: #f9f9f9;
+    background: #f1f1f1;
+    border-color: #00397620;
 }
 
 .form-control:focus {
     border-color: #eaab00;
     box-shadow: 0 0 0 0.2rem#eaab0050;
+}
+
+.form-error {
+    border-color: rgba(240, 128, 128, 0.75);
+    background: #FF000005;
 }
 
 .greyed-out {
@@ -66,19 +80,28 @@ a:hover {
     z-index: 0;
 }
 
-.btn {
+.submit-btn {
     color: white;
     background: #003976;
     width: 100%;
+    border-radius: 0;
+    margin: 1rem 0;
+    transition: all 300ms ease;
 }
 
-.btn:hover {
+.submit-btn:hover {
     color: #003976;
     background: #eaab00;
 }
 .error-text {
-    padding: .25rem 0;
     color: red;
+}
+
+.subtext {
+    margin: 0;
+    margin-top: .5rem;
+    color: grey;
+    font-size: .9rem;
 }
 
 @media only screen and (max-width: 768px) {
