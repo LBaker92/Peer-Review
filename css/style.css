@@ -81,11 +81,13 @@ a:hover {
 }
 
 .submit-btn {
+    border: none;
+    height: 2.5rem;
     color: white;
     background: #003976;
     width: 100%;
     border-radius: 0;
-    margin: 1rem 0;
+    margin: .75rem 0;
     transition: all 300ms ease;
 }
 
