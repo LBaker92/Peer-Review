@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
     $pdo = DBConnection::createInstance();
     $conn = $pdo->getConnection();
 
-    $sql = "SELECT user_email, user_password FROM `users` WHERE user_email = \"" . $formData["email"] . "\"";
+    $sql = "SELECT * FROM `users` WHERE user_email = \"" . $formData["email"] . "\"";
     $statement = $conn->prepare($sql);
     $statement->execute();
 
@@ -31,6 +31,7 @@ if (isset($_POST["submit"])) {
             session_start();
             $_SESSION["email"] = $user["user_email"];
             $_SESSION["password"] = $user["user_password"];
+            $_SESSION["permissions"] = $user["user_role"];
             $_SESSION["logged_in"] = true;
             header("Location: ../index.php");
         }
