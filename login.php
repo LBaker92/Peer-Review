@@ -20,7 +20,7 @@ session_start();
 
 <body>
 
-<?php include('includes/header.php'); ?>
+<?php include 'includes/header.php'; ?>
 
 <script src="js/FormHandler.js"></script>
 <main class="container-fluid">
@@ -42,19 +42,27 @@ session_start();
                        <p class='error-text'>* This field is required.</p>
                     </div>
                     ";
+                } 
+                else {
+                    echo
+                    "
+                    <div class='form-group'>
+                        <label for='email'>Email</label>
+                        <input type='email' name='email' value='" . $_GET["email"] . "' class='form-control' placeholder='email@provider.com' id='form-email' required>
+                    </div>
+                    ";
                 }
             }
             else {
-             ?>
-                 <div class='form-group'>
+                echo
+                "
+                <div class='form-group'>
                     <label for='email'>Email</label>
-                    <input type='email' name='email' class='form-control' id='form-email' placeholder='you@email.com' required>
+                    <input type='email' name='email' class='form-control' placeholder='email@provider.com' id='form-email' required>
                 </div>
-            <?php
+                ";
             }
-            ?>
 
-            <?php
             if (isset($_GET["password"])) {
                 if ($_GET["password"] == "empty") {
                     echo
@@ -65,6 +73,16 @@ session_start();
                         <p class='error-text'>* This field is required.</p>
                     </div>
                     ";
+                }
+                else if ($_GET["password"] == "invalid") {
+                    echo
+                    "
+                    <div class='form-group'>
+                        <label for='password'>Password</label>
+                        <input type='password' name='password' class='form-control form-error' id='form-password' required>
+                        <p class='error-text'>* Invalid password.</p>
+                    </div>
+                    "; 
                 }
             } 
             else {

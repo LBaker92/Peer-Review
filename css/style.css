@@ -54,19 +54,22 @@ a:hover {
 }
 
 .form-control {
-    border-radius: 0;
     background: #f1f1f1;
     border-color: #00397620;
 }
 
 .form-control:focus {
-    border-color: #eaab00;
-    box-shadow: 0 0 0 0.2rem#eaab0050;
+    border-color: #eaab0080;
+    box-shadow: 0 0 .5rem .1rem #eaab0050;
+}
+
+.form-control::placeholder {
+    color: #c5c5c5;
 }
 
 .form-error {
     border-color: rgba(240, 128, 128, 0.75);
-    background: #FF000005;
+    background: #FF000010;
 }
 
 .greyed-out {
@@ -76,17 +79,16 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, .3);
+    background: rgba(0, 0, 0, .5);
     z-index: 0;
 }
 
 .submit-btn {
     border: none;
     height: 2.5rem;
+    width: 100%;
     color: white;
     background: #003976;
-    width: 100%;
-    border-radius: 0;
     margin: .75rem 0;
     transition: all 300ms ease;
 }
@@ -97,6 +99,7 @@ a:hover {
 }
 .error-text {
     color: red;
+    font-size: .9rem;
 }
 
 .subtext {
