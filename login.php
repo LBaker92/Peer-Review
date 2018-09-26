@@ -40,18 +40,18 @@ session_start();
                        <label for='email'>Email</label>
                        <input type='email' name='email' class='form-control form-error' id='form-email' required>
                        <p class='error-text'>* This field is required.</p>
-                   </div>
+                    </div>
                     ";
                 }
             }
-             else {
+            else {
              ?>
                  <div class='form-group'>
                     <label for='email'>Email</label>
                     <input type='email' name='email' class='form-control' id='form-email' placeholder='you@email.com' required>
                 </div>
             <?php
-             }
+            }
             ?>
 
             <?php
@@ -66,7 +66,8 @@ session_start();
                     </div>
                     ";
                 }
-            } else {
+            } 
+            else {
             ?>
                 <div class="form-group">
                     <label for="password">Password</label>

@@ -22,7 +22,6 @@ if (isset($_POST["submit"])) {
     $statement->execute();
 
     $user = $statement->fetch(PDO::FETCH_ASSOC);
-    print_r($user);
 
     // If we were able to retrieve a user in the database with that email
     if (!empty($user)) {
