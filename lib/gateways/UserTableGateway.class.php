@@ -15,20 +15,20 @@ class UserTableGateway {
         
         $users = array();
         foreach($userArray as $user) {
-            $users[$user["user_id"]] = new User($user);
+            $users[$user["id"]] = new User($user);
         }
         return $users;
     }
 
     public function findById($id) {
-        self::$baseSql . " where id = " . $id;
-        $statement = DBQueryRunner::executeQuery(self::$baseSql);
+        $sql = self::$baseSql . " where id = " . $id;
+        $statement = DBQueryRunner::executeQuery($sql);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function findByEmail($email) {
-        self::$baseSql . " where email = " . $email;
-        $statement = DBQueryRunner::executeQuery(self::$baseSql);
+        $sql = self::$baseSql . " where email = '" . $email . "'";
+        $statement = DBQueryRunner::executeQuery($sql);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 

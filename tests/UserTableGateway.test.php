@@ -4,7 +4,7 @@ include_once '../lib/db/DBConnector.class.php';
 
 echo "<h1>USER TABLE GATEWAY TESTS</h1>";
 
-$usergate = new UserTableGateway(DBConnector::createInstance()->getConnection());
+$usergate = new UserTableGateway();
 
 echo "<h3>findById()</h3>";
 echo "<p><strong>ID = 1</strong></p></h3>";
@@ -24,5 +24,8 @@ foreach($users as $user) {
     echo "<br>";
 }
 
-
+echo "<h3>findByEmail()</h3>";
+$user = $usergate->findByEmail("student@test.com");
+print_r($user);
+echo "<br>";
 ?>

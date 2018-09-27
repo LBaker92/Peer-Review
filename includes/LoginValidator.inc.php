@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
                 header("Location: ../index.php");
             } 
             else {
-                header("Location: ../login.php?password=invalid");
+                header("Location: ../login.php?email=" . $formData["email"] . "&password=invalid");
             }
         } 
         else {
