@@ -20,13 +20,15 @@ session_start();
 
 <body>
 
-<?php include 'includes/header.php'; ?>
+<?php 
+include 'includes/header.php';
+?>
 
 <script src="js/FormHandler.js"></script>
 <main class="container-fluid">
     <div class="row">
         <div class="form-container">
-            <form action="includes/LoginValidator.inc.php" method="post" id="login-form" novalidate>
+            <form action="includes/LoginValidator.inc.php" method="post" id="login-form">
             <?php
             if(isset($_SESSION["logged_in"])) {
                 header("Location: ./index.php");
@@ -34,55 +36,50 @@ session_start();
 
             if(isset($_GET["email"])) {
                 if ($_GET["email"] == "empty") {
-                    echo
-                    "
+            ?>
                     <div class='form-group'>
                        <label for='email'>Email</label>
                        <input type='email' name='email' class='form-control form-error' id='form-email' required>
                        <p class='error-text'>* This field is required.</p>
                     </div>
-                    ";
+            <?php
                 } 
                 else {
-                    echo
-                    "
+            ?>
                     <div class='form-group'>
                         <label for='email'>Email</label>
-                        <input type='email' name='email' value='" . $_GET["email"] . "' class='form-control' placeholder='email@provider.com' id='form-email' required>
+                        <input type='email' name='email' value=" <?= $_GET["email"] ?> " class='form-control' placeholder='email@provider.com' id='form-email' required>
                     </div>
-                    ";
+            <?php
                 }
             }
             else {
-                echo
-                "
+            ?>
                 <div class='form-group'>
                     <label for='email'>Email</label>
                     <input type='email' name='email' class='form-control' placeholder='email@provider.com' id='form-email' required>
                 </div>
-                ";
+            <?php
             }
 
             if (isset($_GET["password"])) {
                 if ($_GET["password"] == "empty") {
-                    echo
-                    "
+            ?>
                     <div class='form-group'>
                         <label for='password'>Password</label>
                         <input type='password' name='password' class='form-control form-error' id='form-password' required>
                         <p class='error-text'>* This field is required.</p>
                     </div>
-                    ";
+            <?php
                 }
                 else if ($_GET["password"] == "invalid") {
-                    echo
-                    "
+            ?>
                     <div class='form-group'>
                         <label for='password'>Password</label>
                         <input type='password' name='password' class='form-control form-error' id='form-password' required>
                         <p class='error-text'>* Invalid password.</p>
                     </div>
-                    "; 
+            <?php
                 }
             } 
             else {

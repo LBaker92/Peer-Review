@@ -1,5 +1,6 @@
 <?php
-include_once "../lib/DBConnector.class.php";
+
+include_once '../lib/gateways/GatewayHandler.class.php';
 include_once "helper-functions.php";
 
 if (isset($_POST["submit"])) {
@@ -14,14 +15,9 @@ if (isset($_POST["submit"])) {
         header("Location: " . $url);
     }
     else {
-        $pdo = DBConnector::createInstance();
-        $conn = $pdo->getConnection();
 
-        $sql = "SELECT * FROM `users` WHERE email = \"" . $formData["email"] . "\"";
-        $statement = $conn->prepare($sql);
-        $statement->execute();
-
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        $gateHandler = new GatewayHandler();
+        $user = $gateHandler->getUserGate()->findByEmail($formData["email"]);
 
         // If we were able to retrieve a user in the database with that email
         if (!empty($user)) {
