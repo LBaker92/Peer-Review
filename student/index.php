@@ -1,4 +1,5 @@
 <?php
+include_once '../includes/helper-functions.php';
 session_start();
 ?>
 
@@ -17,11 +18,7 @@ session_start();
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-
-    <?php
-     include_once '../includes/header.php'; 
-     ?>
-
+    <?= include_once '../includes/header.php'; ?>
     <div class="row">
         <div class="col-md-12 pt-5 text-center">
             <h1>STUDENT PAGE</h1>

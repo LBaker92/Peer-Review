@@ -1,7 +1,6 @@
 <?php
 
-function inputMissing($postVariables)
-{
+function inputMissing($postVariables) {
 
     foreach ($postVariables as $field) {
         if (empty($field)) {
@@ -11,8 +10,7 @@ function inputMissing($postVariables)
     return false;
 }
 
-function generateRedirectUrl($phpfilename, $postVariables)
-{
+function generateRedirectUrl($phpfilename, $postVariables) {
 
     $url = "../" . $phpfilename . "?";
     $queryString = "";
