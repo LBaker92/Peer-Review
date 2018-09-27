@@ -23,13 +23,15 @@ class UserTableGateway {
     public function findById($id) {
         $sql = self::$baseSql . " where id = " . $id;
         $statement = DBQueryRunner::executeQuery($sql);
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return new User($result);
     }
 
     public function findByEmail($email) {
         $sql = self::$baseSql . " where email = '" . $email . "'";
         $statement = DBQueryRunner::executeQuery($sql);
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return new User($result);
     }
 
 }
