@@ -16,6 +16,7 @@ $(document).ready(function() {
                 main.appendChild(background)
                 $(background).fadeIn(300);
                 $(".form-container").addClass("box-shadow");
+                $(".form-container").css({"border": "none"});
                 added = true;
             }
         }
@@ -24,7 +25,6 @@ $(document).ready(function() {
 
     // Look for click even on the form background
     $("main").on("click", ".greyed-out", function() {
-
         $(this).fadeOut(300, function() {
             $(this).remove();
             $(".form-container").removeClass("box-shadow");
