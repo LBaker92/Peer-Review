@@ -1,24 +1,25 @@
 <?php
 
-class DBQuery {
+include 'DBConnector.class.php';
+
+class DBQueryRunner {
 
     private static $pdo = null;
 
     function __construct() { }
 
     public function setConnection() {
-        self::$pdo = DBConnector::getInstance()->getConnection();
+        self::$pdo = DBConnector::createInstance()->getConnection();
     }
 
-    public function run_query($sql) {
-        self::$db ?:
-        $statement = $db->prepare($sql);
+    public function executeQuery($sql) {
+        self::$pdo ?: self::setConnection();
+        $statement = self::$pdo->prepare($sql);
         $success = $statement->execute();
 
         if (!$success) {
             throw new PDOException;
         }
-
 
         return $statement;
     }
