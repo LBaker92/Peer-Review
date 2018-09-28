@@ -97,3 +97,18 @@ function parseCsv($filePath) {
 
     return $studentArray;
 }
+
+// NEED TO SETUP SMTP SERVER
+function notifyStudent($email, $password) {
+
+    $header = "From: test@test.com";
+
+
+    $msg = "Your account has been setup! [URL TO WEBSITE]\n
+            Your login info is:\n
+            EMAIL: " . $email . "\n
+            PASSWORD: " . $password;
+
+    $msg = wordwrap($msg,70);
+    mail($email, "Your Account Is Ready!", $msg, $header);
+}

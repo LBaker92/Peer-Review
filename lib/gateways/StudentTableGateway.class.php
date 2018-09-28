@@ -5,7 +5,7 @@ include_once 'Student.class.php';
 
 class StudentTableGateway {
 
-    private static $baseSql = "Select * from Students";
+    private static $baseSql = "Select * from students";
 
     public function __construct() { }
 
@@ -37,7 +37,7 @@ class StudentTableGateway {
     // Clean up SQL later
     public function insert($student) {
         $delimiter = '", "';
-        $sql = 'INSERT INTO student (first_name,
+        $sql = 'INSERT INTO students (first_name,
                                      last_name,
                                      username,
                                      email,

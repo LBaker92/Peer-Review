@@ -1,16 +1,16 @@
 <?php
 
-include_once '../lib/gateways/UserTableGateway.class.php';
+include_once '../lib/gateways/StudentTableGateway.class.php';
 
 class GatewayHandler {
 
-    private $userTableGateway = null;
+    private $studentTableGateway = null;
 
     public function __construct() {
-        $this->userTableGateway = new UserTableGateway();
+        $this->studentTableGateway = new StudentTableGateway();
     }
 
-    public function getUserGate() { return $this->userTableGateway; }
+    public function getStudentGate() { return $this->studentTableGateway; }
 
 }
 

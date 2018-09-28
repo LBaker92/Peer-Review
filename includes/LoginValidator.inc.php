@@ -18,17 +18,35 @@ if (isset($_POST["submit"])) {
     else {
 
         $gateHandler = new GatewayHandler();
-        $user = $gateHandler->getUserGate()->findByEmail($formData["email"]);
 
-        // If we were able to retrieve the user from the database
-        if (!empty($user)) {
+        /*
+
+            LOGIC NEEDED:
+            Compare the entered email address with the instructor emails.
+                If it is found, compare the entered password with that instructor's password.
+                    If it matches, redirect to the admin page.
+                    Else go back to login page with password error.
+
+                Else compare the entered email address with the student emails.
+                    If it is found, compare the entered password with that instructor's password.
+                        If it matches, redirect to the admin page.
+                        Else go back to login page with password error.
+
+                Else redirect to the registration page because they are not in the database.
+
+        */
+
+        //$student = $gateHandler->getStudentGate()->findByEmail($formData["email"]);
+
+        // If we were able to retrieve the student from the database
+        if (!empty($student)) {
             // If the passwords match, start the session.
-            if ($formData["password"] == $user->getPassword()) {
+            if ($formData["password"] == $student->getPassword()) {
                 session_start();
-                $_SESSION["id"] = $user->getId();
-                $_SESSION["email"] = $user->getEmail();
-                $_SESSION["password"] = $user->getPassword();
-                $_SESSION["permissions"] = $user->getRole();
+                $_SESSION["id"] = $student->getId();
+                $_SESSION["email"] = $student->getEmail();
+                $_SESSION["password"] = $student->getPassword();
+                $_SESSION["permissions"] = $student->getRole();
                 $_SESSION["logged_in"] = true;
                 header("Location: ../index.php");
             } 

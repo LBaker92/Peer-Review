@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+// CHECK TO SEE IF THEY ARE LOGGED IN BEFORE SHOWING THIS PAGE
 ?>
 
 <!DOCTYPE html>
@@ -22,10 +24,12 @@ session_start();
      include_once '../includes/header.php'; 
      ?>
 
-    <div class="row">
-        <div class="col-md-12 pt-5 text-center">
-            <h1>ADMIN PAGE</h1>
-            <a href="../logout.php"><button class="btn">LOGOUT</button></a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 pt-5 text-center">
+                <h1>ADMIN PAGE</h1>
+                <a href="../logout.php"><button class="btn">LOGOUT</button></a>
+            </div>
         </div>
     </div>
     <div class="container pt-5">
