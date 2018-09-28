@@ -1,6 +1,7 @@
 <?php
 
 class Student {
+    
     private $id = null;
     private $first_name;
     private $last_name;

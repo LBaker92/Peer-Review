@@ -36,9 +36,18 @@ class StudentTableGateway {
 
     // Clean up SQL later
     public function insert($student) {
-        $sql = "INSERT INTO student (first_name, last_name, username, email, password)
-        VALUES(\"" . $student->getFirstName() . "\", \"" . $student->getLastName() . "\", \""
-                   . $student->getUsername() . "\", \"" . $student->getEmail() . "\", \"" . $student->getPassword() . "\")";
+        $delimiter = '", "';
+        $sql = 'INSERT INTO student (first_name,
+                                     last_name,
+                                     username,
+                                     email,
+                                     password)
+                VALUES("'
+                . $student->getFirstName() . $delimiter
+                . $student->getLastName() . $delimiter
+                . $student->getUsername() . $delimiter
+                . $student->getEmail() . $delimiter
+                . $student->getPassword() . '")';
         $statement = DBQueryRunner::executeQuery($sql);
     }
 }
