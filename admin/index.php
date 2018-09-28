@@ -28,5 +28,18 @@ session_start();
             <a href="../logout.php"><button class="btn">LOGOUT</button></a>
         </div>
     </div>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form class="database-filler" action="../includes/FileParser.php" method="post" enctype="multipart/form-data">
+                    <label for="file"><b>ROSTER</b><br>File should be in .csv format.</label>
+                    <input type="file" name="roster" id="roster">
+                    <button type="submit" name="submit" class="btn">Login</button>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
 </body>
 </html>

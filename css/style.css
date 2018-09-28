@@ -110,6 +110,15 @@ a:hover {
     font-size: .9rem;
 }
 
+#roster {
+    background: #f3f3f3;
+    border: .01rem solid lightgrey;
+}
+
+#roster input[type="file"] {
+    border: 1px solid red;
+}
+
 @media only screen and (max-width: 768px) {
     .nav-title {
         padding-top: .5rem;
