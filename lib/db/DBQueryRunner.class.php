@@ -15,15 +15,13 @@ class DBQueryRunner {
     public function executeQuery($sql) {
         self::$pdo ?: self::setConnection();
         $statement = self::$pdo->prepare($sql);
-        $success = $statement->execute();
+        $successful = $statement->execute();
 
-        if (!$success) {
+        if (!$successful) {
             throw new PDOException;
         }
-
         return $statement;
     }
-
 }
 
 
