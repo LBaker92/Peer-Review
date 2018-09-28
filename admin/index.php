@@ -1,7 +1,10 @@
 <?php
 session_start();
 
-// CHECK TO SEE IF THEY ARE LOGGED IN BEFORE SHOWING THIS PAGE
+// if (!isset($_POST["logged_in"])) {
+//     header("Location: ../login.php");
+// }
+
 ?>
 
 <!DOCTYPE html>
