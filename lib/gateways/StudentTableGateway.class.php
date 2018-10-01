@@ -1,52 +1,69 @@
 <?php
 
 include_once '../lib/db/DBQueryRunner.class.php';
+include_once 'TableGateway.class.php';
 include_once 'Student.class.php';
 
-class StudentTableGateway {
+class StudentTableGateway extends TableGateway {
 
-    private static $baseSql = "Select * from students";
+    private static $baseSql = "SELECT * FROM students";
+    private static $delimiter = '", "';
 
     public function __construct() { }
 
     public function findAll() {
         $statement = DBQueryRunner::executeQuery(self::$baseSql);
-        $StudentArray = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $studentArray = $statement->fetchAll(PDO::FETCH_ASSOC);
         
-        $Students = array();
-        foreach($StudentArray as $Student) {
-            $Students[$Student["id"]] = new Student($Student);
+        $students = array();
+        foreach($studentArray as $student) {
+            array_push($students, new Student($student));
         }
-        return $Students;
+
+        if (empty($students)) {
+            return;
+        }
+        return $students;
     }
 
     public function findById($id) {
-        $sql = self::$baseSql . " where id = " . $id;
+        $sql = self::$baseSql . ' where id = "' . $id . '"';
         $statement = DBQueryRunner::executeQuery($sql);
+
         $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($result)) {
+            print("ID NOT FOUND IN DATABASE");
+            return;
+        }
         return new Student($result);
     }
 
     public function findByEmail($email) {
-        $sql = self::$baseSql . " where email = '" . $email . "'";
+        $sql = self::$baseSql . ' where email = "' . $email . '"';
         $statement = DBQueryRunner::executeQuery($sql);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($result)) {
+            print("EMAIL NOT FOUND IN DATABASE");
+            return;
+        }
+
         return new Student($result);
     }
 
     // Clean up SQL later
     public function insert($student) {
-        $delimiter = '", "';
         $sql = 'INSERT INTO students (first_name,
                                      last_name,
                                      username,
                                      email,
                                      password)
                 VALUES("'
-                . $student->getFirstName() . $delimiter
-                . $student->getLastName() . $delimiter
-                . $student->getUsername() . $delimiter
-                . $student->getEmail() . $delimiter
+                . $student->getFirstName() . self::$delimiter
+                . $student->getLastName() . self::$delimiter
+                . $student->getUsername() . self::$delimiter
+                . $student->getEmail() . self::$delimiter
                 . $student->getPassword() . '")';
         $statement = DBQueryRunner::executeQuery($sql);
     }

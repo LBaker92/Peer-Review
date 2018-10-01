@@ -1,6 +1,13 @@
 <?php
+
 include_once '../includes/helper-functions.php';
+
 session_start();
+
+if (!isset($_SESSION["logged_in"])) {
+    header("Location: ../login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -18,12 +25,8 @@ session_start();
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <?= include_once '../includes/header.php'; ?>
-    <div class="row">
-        <div class="col-md-12 pt-5 text-center">
-            <h1>STUDENT PAGE</h1>
-            <a href="../logout.php"><button class="btn">LOGOUT</button></a>
-        </div>
-    </div>
+
+<?php include_once '../includes/header.php'; ?>
+
 </body>
 </html>

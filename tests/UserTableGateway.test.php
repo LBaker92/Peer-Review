@@ -1,10 +1,10 @@
 <?php
-include_once '../lib/gateways/UserTableGateway.class.php';
+include_once '../lib/gateways/StudentTableGateway.class.php';
 include_once '../lib/db/DBConnector.class.php';
 
 echo "<h1>USER TABLE GATEWAY TESTS</h1>";
 
-$usergate = new UserTableGateway();
+$usergate = new StudentTableGateway();
 
 echo "<h3>findById()</h3>";
 echo "<p><strong>ID = 1</strong></p></h3>";
@@ -13,7 +13,7 @@ print_r($user);
 echo "<br>";
 
 echo "<p><strong>ID = 2</strong></p></h3>";
-$user = $usergate->findById(2);
+$user = $usergate->findById(3);
 print_r($user);
 echo "<br>";
 
@@ -25,7 +25,7 @@ foreach($users as $user) {
 }
 
 echo "<h3>findByEmail()</h3>";
-$user = $usergate->findByEmail("student@test.com");
+$user = $usergate->findByEmail("lbaker38@kent.edu");
 print_r($user);
 echo "<br>";
 ?>

@@ -86,11 +86,11 @@ a:hover {
 
 .submit-btn {
     border: none;
-    height: 2.5rem;
+    border-radius: 0;
     width: 100%;
     color: white;
     background: #003976;
-    margin: .75rem 0;
+    margin: .75rem auto;
     transition: all 300ms ease;
 }
 
@@ -111,12 +111,17 @@ a:hover {
 }
 
 #roster {
-    background: #f3f3f3;
+    background: #f8f8f8;
     border: .01rem solid lightgrey;
 }
 
-#roster input[type="file"] {
-    border: 1px solid red;
+#logout-btn {
+    background: #ffffff90;
+    border-radius: 5rem;
+}
+
+#logout-btn:hover {
+    background: #eaab00;
 }
 
 @media only screen and (max-width: 768px) {

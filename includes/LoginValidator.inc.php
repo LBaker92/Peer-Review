@@ -36,29 +36,52 @@ if (isset($_POST["submit"])) {
 
         */
 
-        //$student = $gateHandler->getStudentGate()->findByEmail($formData["email"]);
+        $instructor = $gateHandler->getInstructorGate()->findByEmail($formData["email"]);
 
-        // If we were able to retrieve the student from the database
-        if (!empty($student)) {
-            // If the passwords match, start the session.
-            if ($formData["password"] == $student->getPassword()) {
+        if (!empty($instructor)) {
+            if ($formData["password"] == $instructor->getPassword()) {
                 session_start();
-                $_SESSION["id"] = $student->getId();
-                $_SESSION["email"] = $student->getEmail();
-                $_SESSION["password"] = $student->getPassword();
-                $_SESSION["permissions"] = $student->getRole();
+                $_SESSION["id"] = $instructor->getId();
+                $_SESSION["first_name"] = $instructor->getFirstName();
+                $_SESSION["last_name"] = $instructor->getLastName();
+                $_SESSION["username"] = $instructor->getUsername();
+                $_SESSION["email"] = $instructor->getEmail();
+                $_SESSION["password"] = $instructor->getPassword();
+                $_SESSION["permissions"] = "admin";
                 $_SESSION["logged_in"] = true;
-                header("Location: ../index.php");
-            } 
+                header("Location: ../admin/index.php");
+            }
             // If the password didn't match, send them back to the login page with an error message.
             else {
                 header("Location: ../login.php?email=" . $formData["email"] . "&password=invalid");
             }
+            // Stop the rest of the validator php from running
         }
-        // If the email account didn't exist, send them to register.
         else {
-            header("Location: ../register.php?error=email+not+found&email=" . $formData["email"]);
-            print("WRONG EMAIL");
+            $student = $gateHandler->getStudentGate()->findByEmail($formData["email"]);
+
+            // If we were able to retrieve the student from the database
+            if (!empty($student)) {
+                // If the passwords match, start the session.
+                if ($formData["password"] == $student->getPassword()) {
+                    session_start();
+                    $_SESSION["id"] = $student->getId();
+                    $_SESSION["email"] = $student->getEmail();
+                    $_SESSION["password"] = $student->getPassword();
+                    $_SESSION["permissions"] = "student";
+                    $_SESSION["logged_in"] = true;
+                    header("Location: ../index.php");
+                } 
+                // If the password didn't match, send them back to the login page with an error message.
+                else {
+                    header("Location: ../login.php?email=" . $formData["email"] . "&password=invalid");
+                }
+            }
+            // If the email account didn't exist, send them to register.
+            else {
+                header("Location: ../register.php?error=email+not+found&email=" . $formData["email"]);
+                print("WRONG EMAIL");
+            }
         }
     }
 }

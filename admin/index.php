@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// if (!isset($_POST["logged_in"])) {
-//     header("Location: ../login.php");
-// }
+if (!isset($_SESSION["logged_in"])) {
+    header("Location: ../login.php");
+}
 
 ?>
 
@@ -13,7 +13,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Student View</title>
+    <title>ADMIN</title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -27,22 +27,19 @@ session_start();
      include_once '../includes/header.php'; 
      ?>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 pt-5 text-center">
-                <h1>ADMIN PAGE</h1>
-                <a href="../logout.php"><button class="btn">LOGOUT</button></a>
-            </div>
-        </div>
-    </div>
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <form class="database-filler" action="../includes/FileParser.php" method="post" enctype="multipart/form-data">
-                    <label for="file"><b>ROSTER</b><br>File should be in .csv format.</label>
-                    <input type="file" name="roster" id="roster">
-                    <button type="submit" name="submit" class="btn">Login</button>
+                    <div class="form-group">
+                        <label for="file"><h4><b>CLASS ROSTER</b></h4></label>
+                        <input type="file" name="roster" class="form-control-file" id="roster">
+                        <p class="error-text pt-1">* File should be in .csv format.</p>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" name="submit" class="btn btn-primary">Login</button>
+                    </div>
                 </form>
             </div>
             <div class="col-md-3"></div>

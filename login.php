@@ -48,7 +48,7 @@ include 'includes/header.php';
             ?>
                     <div class='form-group'>
                         <label for='email'>Email</label>
-                        <input type='email' name='email' value=" <?= $_GET["email"] ?> " class='form-control' placeholder='email@provider.com' id='form-email' required>
+                        <input type='email' name='email' value=" <?= $_GET["email"] ?> " class='form-control' placeholder='username@kent.edu' id='form-email' required>
                     </div>
             <?php
                 }
@@ -57,7 +57,7 @@ include 'includes/header.php';
             ?>
                 <div class='form-group'>
                     <label for='email'>Email</label>
-                    <input type='email' name='email' class='form-control' placeholder='email@provider.com' id='form-email' required>
+                    <input type='email' name='email' class='form-control' placeholder='username@kent.edu' id='form-email' required>
                 </div>
             <?php
             }
@@ -91,8 +91,8 @@ include 'includes/header.php';
             <?php
             }
             ?>
-                <button type="submit" name="submit" class="btn submit-btn">Login</button>
-                <p class="subtext">Not registered? <a href="register.php" id="create-account">Create an account.</a></p>
+                <button type="submit" name="submit" class="btn submit-btn">LOGIN</button>
+                <p class="subtext text-center">Not registered? <a href="register.php" id="create-account">Create an account.</a></p>
             </form>
         </div>
     </div>
