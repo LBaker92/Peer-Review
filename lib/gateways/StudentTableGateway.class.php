@@ -33,7 +33,6 @@ class StudentTableGateway extends TableGateway {
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (empty($result)) {
-            print("ID NOT FOUND IN DATABASE");
             return;
         }
         return new Student($result);
@@ -45,7 +44,6 @@ class StudentTableGateway extends TableGateway {
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (empty($result)) {
-            print("EMAIL NOT FOUND IN DATABASE");
             return;
         }
 

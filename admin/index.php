@@ -5,6 +5,13 @@ if (!isset($_SESSION["logged_in"])) {
     header("Location: ../login.php");
 }
 
+include_once '../lib/gateways/GatewayHandler.class.php';
+
+$gateHandler = new GatewayHandler();
+
+$adminSettings = $gateHandler->getAdminSettingsGate()->getAllSettings();
+
+
 ?>
 
 <!DOCTYPE html>

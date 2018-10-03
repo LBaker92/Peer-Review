@@ -13,7 +13,7 @@ class InstructorTableGateway extends TableGateway {
         
         $instructors = array();
         foreach($instructorArray as $instructor) {
-            $instructors[$instructor["id"]] = new Student($instructor);
+            array_push($instructors, new Instructor($instructor));
         }
         return $instructors;
     }
