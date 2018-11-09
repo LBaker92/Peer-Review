@@ -26,14 +26,9 @@ class InstructorTableGateway extends TableDataGateway
         return "InstructorID";
     }
 
-    public function getEmailFieldName()
-    {
-        return "Email";
-    }
-
     public function findByEmail($email)
     {
-        $sql = $this->getSelectStatement() . ' WHERE ' . $this->getEmailFieldName() . '= :email';
+        $sql = $this->getSelectStatement() . ' WHERE Email = :email';
         return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, array(':email' => $email)));
     }
 }

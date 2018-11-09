@@ -37,9 +37,10 @@ include 'includes/config.inc.php';
             print_r($student);
             echo '<br/>';
         }
+
+        echo '<h3>findByEmail("Johndoe@gmail.com")</h3>';
+        $student = $studentGate->findByEmail('Johndoe@gmail.com');
+        print_r($student);
     ?>
 </body>
 </html>
-
-<?php
-?>
