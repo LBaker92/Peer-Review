@@ -1,6 +1,6 @@
 <?php
 
-class StudentGroup extends DomainObject
+class Group extends DomainObject
 {
     private static function getFieldNames()
     {
@@ -11,6 +11,7 @@ class StudentGroup extends DomainObject
     {
         parent::__construct($data, $generateExec);
     }
+    
 }
 
 ?>

@@ -2,18 +2,19 @@
 
 class InstructorTableGateway extends TableDataGateway
 {
-    public function __construct($dbAdapter) {
-        parent::__construct($dbAdapter);
-    }
-
-    protected function getDomainObjectClassName()
+    public function __construct($dbAdapter)
     {
-        return "Instructor";
+        parent::__construct($dbAdapter);
     }
 
     protected function getTableName()
     {
         return "Instructors";
+    }
+
+    protected function getDomainObjectClassName()
+    {
+        return "Instructor";
     }
 
     protected function getOrderFields()

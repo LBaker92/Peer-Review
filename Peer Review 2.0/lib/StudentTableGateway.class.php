@@ -2,18 +2,19 @@
 
 class StudentTableGateway extends TableDataGateway
 {
-    public function __construct($dbAdapter) {
-        parent::__construct($dbAdapter);
-    }
-
-    protected function getDomainObjectClassName()
+    public function __construct($dbAdapter)
     {
-        return "Student";
+        parent::__construct($dbAdapter);
     }
 
     protected function getTableName()
     {
         return "Students";
+    }
+
+    protected function getDomainObjectClassName()
+    {
+        return "Student";
     }
 
     protected function getOrderFields()
