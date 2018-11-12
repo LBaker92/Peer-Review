@@ -27,7 +27,11 @@ class GroupTableGateway extends TableDataGateway
         return "GroupID";
     }
 
-    // Additional database querying functionality here
+    public function findByLeaderEmail($leaderEmail)
+    {
+        // findBy returns an array, so we return the first index
+        return $this->findBy("LeaderEmail = ?", $leaderEmail)[0];
+    }
 }
 
 ?>

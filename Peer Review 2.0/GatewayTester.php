@@ -13,7 +13,6 @@ include 'includes/config.inc.php';
 <body>
     <h1>Gateway Tester</h1>
     <?php
-        echo '<h1/>';
         echo '<h2>InstructorTableGateway Tests';
         $instructorGate = new InstructorTableGateway($dbAdapter);
         echo '<h3>findAll()</h3>';
@@ -23,11 +22,18 @@ include 'includes/config.inc.php';
             echo '<br/>';
         }
 
+        echo '<h3>findByID("1")</h3>';
+        $instructor = $instructorGate->findByID('1');
+        print_r($instructor);
+
         echo '<h3>findByEmail("lbaker38@kent.edu")</h3>';
         $instructor = $instructorGate->findByEmail('lbaker38@kent.edu');
         print_r($instructor);
 
-        echo '<h1/>';
+        echo "<br/>";
+        echo "<br/>";
+        echo "<br/>";
+
         echo '<h2>StudentTableGateway Tests';
         $studentGate = new StudentTableGateway($dbAdapter);
         echo '<h3>findAll()</h3>';
@@ -37,11 +43,18 @@ include 'includes/config.inc.php';
             echo '<br/>';
         }
 
-        echo '<h3>findByEmail("lbaker38@kent.edu")</h3>';
-        $student = $studentGate->findByEmail('lbaker38@kent.edu');
+        echo '<h3>findByID("1")</h3>';
+        $student = $studentGate->findByID('1');
         print_r($student);
 
-        echo '<h1/>';
+        echo '<h3>findByEmail("johndoe@kent.edu")</h3>';
+        $student = $studentGate->findByEmail('johndoe@kent.edu');
+        print_r($student);
+
+        echo "<br/>";
+        echo "<br/>";
+        echo "<br/>";
+
         echo '<h2>GroupTableGateway Tests';
         $groupGate = new GroupTableGateway($dbAdapter);
         echo '<h3>findAll()</h3>';
@@ -51,7 +64,14 @@ include 'includes/config.inc.php';
             echo '<br/>';
         }
 
-        echo '<h1/>';
+        echo '<h3>findByLeaderEmail("johndoe@kent.edu")</h3>';
+        $group = $groupGate->findByLeaderEmail("johndoe@kent.edu");
+        print_r($group);
+
+        echo "<br/>";
+        echo "<br/>";
+        echo "<br/>";
+
         echo '<h2>GradeCriteriaTableGateway Tests';
         $gradecriteriaGate = new GradeCriteriaTableGateway($dbAdapter);
         echo '<h3>findAll()</h3>';
@@ -60,6 +80,46 @@ include 'includes/config.inc.php';
             print_r($gradecriteria);
             echo '<br/>';
         }
+
+        echo '<h3>findByID("Participation")</h3>';
+        $criteria = $gradecriteriaGate->findByID("Participation");
+        print_r($criteria);
+        echo "<br/>";
+
+        echo "<br/>";
+        echo "<br/>";
+        echo "<br/>";
+        
+        echo '<h2>GradeTableGateway Tests';
+        $gradeGate = new GradeTableGateway($dbAdapter);
+        echo '<h3>findAll()</h3>';
+        $grades = $gradeGate->findAll();
+        foreach ($grades as $grade) {
+            print_r($grade);
+            echo '<br/>';
+        }
+
+        echo '<h3>findByStudentID(1)</h3>';
+        $grades = $gradeGate->findByStudentID(1);
+        foreach ($grades as $grade) {
+            print_r($grade);
+            echo "<br/>";
+        }
+
+        echo '<h3>findByGraderID(2)</h3>';
+        $grades = $gradeGate->findByGraderID(2);
+        foreach ($grades as $grade) {
+            print_r($grade);
+            echo "<br/>";
+        }
+
+        echo '<h3>findByEvaluationID(1)</h3>';
+        $grades = $gradeGate->findByEvaluationID(1);
+        foreach ($grades as $grade) {
+            print_r($grade);
+            echo "<br/>";
+        }
+        
     ?>
 </body>
 </html>

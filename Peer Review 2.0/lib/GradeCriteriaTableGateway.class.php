@@ -26,8 +26,6 @@ class GradeCriteriaTableGateway extends TableDataGateway
     {
         return "Title";
     }
-
-    // Additional database querying functionality here
 }
 
 ?>

@@ -29,8 +29,8 @@ class StudentTableGateway extends TableDataGateway
 
     public function findByEmail($email)
     {
-        $sql = $this->getSelectStatement() . ' WHERE Email = :email';
-        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, array(':email' => $email)));
+        // findBy returns an array, so we return the first index
+        return $this->findBy("Email = ?", $email)[0];
     }
 }
 

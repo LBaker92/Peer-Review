@@ -27,7 +27,20 @@ class GradeTableGateway extends TableDataGateway
         return "GradeID";
     }
 
-    // Additional database querying functionality here
+    public function findByStudentID($studentID)
+    {
+        return $this->findBy("StudentID = ?", $studentID);
+    }
+
+    public function findByGraderID($graderID)
+    {
+        return $this->findBy("GraderID = ?", $graderID);
+    }
+
+    public function findByEvaluationID($evalID)
+    {
+        return $this->findBy("EvaluationID = ?", $evalID);
+    }
 }
 
 ?>
