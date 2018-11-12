@@ -66,7 +66,7 @@ abstract class DomainObject
     */
     public function __get($name)
     {
-        //$this->checkFieldName($name);
+        $this->checkFieldName($name);
         $accessor = 'get' . ucfirst($name);
         if (method_exists($this, $accessor) && is_callable(array($this, $accessor))) {
             return $this->$accessor;
@@ -76,7 +76,8 @@ abstract class DomainObject
         }
         if ($this->generateException) {
             throw new Exception('The field ' . $name . ' has not been set for this row yet.');
-        } else {
+        } 
+        else {
             return "";
         }
 
