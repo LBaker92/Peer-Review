@@ -16,17 +16,17 @@ session_start();
 <link rel="stylesheet" href="css/style.css">
 <body>
     <div class="login-box">
-        <form action="lib/loginValidator.php" method="post">
+        <form action="lib/loginValidator.php" method="post" novalidate>
             <div class="form-group">
                 <label for="email-field">Email</label>
-                <input type="text" class="form-control" name="email" id="email-field" placeholder="Enter your email.">
+                <input type="text" class="form-control" name="email" id="email-field" placeholder="Enter your email." required>
             </div>
             <div class="form-group">
                 <label for="password-field">Password</label>
-                <input type="text" class="form-control" name="password" id="password-field" placeholder="Enter your password.">
+                <input type="text" class="form-control" name="password" id="password-field" placeholder="Enter your password." required>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-block" value="Login">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </div>
         </form>
     </div>
