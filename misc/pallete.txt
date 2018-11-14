@@ -1,4 +1,0 @@
-100% - 80% - 50% - 20%
-
-Main Color: #003976
-Secondary Color: #eaab00

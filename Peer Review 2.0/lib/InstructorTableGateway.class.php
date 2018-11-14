@@ -29,8 +29,15 @@ class InstructorTableGateway extends TableDataGateway
 
     public function findByEmail($email)
     {
-        // findBy returns an array, so we return the first index
-        return $this->findBy("Email = ?", $email)[0];
+        $instructorArray = $this->findBy("Email = ?", $email);
+        if (count($instructorArray) > 0) {
+            // findBy returns an array, so we return the first index
+            return $instructorArray[0];
+        }
+        else {
+            return NULL;
+        }
+
     }
 }
 

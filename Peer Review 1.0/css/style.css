@@ -1,0 +1,147 @@
+a {
+    color: #00397690;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #eaab00;
+}
+
+#nav {
+    color: white;
+    background: #003976;
+    border-bottom: 5px solid #eaab00;
+}
+
+.nav-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 2rem;
+    color: white;
+}
+
+.nav-title:hover {
+    color: white;
+}
+
+.logout-btn {
+    border-radius: 0;
+    background: #aeeae5;
+}
+
+.logout-btn:hover {
+    background: #e5e854;
+}
+
+.form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 350px;
+    padding: 2rem;
+    color: #003976;
+    background: white;
+    z-index: 1;
+    box-shadow: 0 0 3rem rgba(0, 0, 0, .3);
+    transform: translate(-50%, -50%);
+    transition: all 300ms ease;
+}
+
+.box-shadow {
+    box-shadow: 0 0 3rem .5rem rgba(0, 0, 0, .3);
+}
+
+.form-control {
+    background: #f1f1f1;
+    border-color: rgb(196, 196, 196);
+    border-radius: 0;
+}
+
+.form-control:focus {
+    border-color: #eaab0080;
+    box-shadow: 0 0 .5rem .1rem #eaab0050;
+}
+
+.form-control::placeholder {
+    color: #c5c5c5;
+}
+
+.form-error {
+    border-color: rgba(240, 128, 128, 0.75);
+    background: #FF000010;
+}
+
+.greyed-out {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .6);
+    z-index: 0;
+}
+
+.submit-btn {
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    color: white;
+    background: #003976;
+    margin: .75rem auto;
+    transition: all 300ms ease;
+}
+
+.submit-btn:hover {
+    color: #003976;
+    background: #eaab00;
+}
+.error-text {
+    color: red;
+    font-size: .9rem;
+}
+
+.subtext {
+    margin: 0;
+    margin-top: .5rem;
+    color: grey;
+    font-size: .9rem;
+}
+
+#roster {
+    background: #f8f8f8;
+    border: .01rem solid lightgrey;
+}
+
+#logout-btn {
+    background: #ffffff90;
+    border-radius: 5rem;
+}
+
+#logout-btn:hover {
+    background: #eaab00;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-title {
+        padding-top: .5rem;
+    }
+
+    .form-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transform: none;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        transition: none;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+}
