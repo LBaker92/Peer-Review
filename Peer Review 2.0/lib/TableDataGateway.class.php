@@ -120,6 +120,9 @@ abstract class TableDataGateway
     {
         $className = $this->getDomainObjectClassName();
 
+        if (!$result) {
+            return NULL;
+        }
         return new $className($result, false);
     }
 

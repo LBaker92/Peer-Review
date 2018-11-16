@@ -30,7 +30,7 @@ class InstructorTableGateway extends TableDataGateway
     public function findByEmail($email)
     {
         $sql = $this->getSelectStatement() . " WHERE Email = ?";
-        return $this->dbAdapter->fetchRow($sql, $email);
+        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $email));
     }
 }
 

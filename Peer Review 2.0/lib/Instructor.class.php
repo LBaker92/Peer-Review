@@ -18,7 +18,7 @@ class Instructor extends DomainObject
         parent::__construct($data, $generateExec);
     }
 
-    public function getFullName($isCommaDelimited = false)
+    public function getFullName($isCommaDelimited=false)
     {
         if ($isCommaDelimited) {
             return $this->LastName . ', ' . $this->FirstName;

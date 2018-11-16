@@ -3,9 +3,9 @@ include 'includes/config.inc.php';
 session_start();
 
 if (!empty($_SESSION['user'])) {
-    // Redirect a student back to the student page
-    if (!$_SESSION['user']['admin']) {
-        header('Location: student.php');
+    if ($_SESSION['user']['admin']) {
+        // Redirect an admin back to the admin page
+        header('Location: admin.php');
     }
 }
 ?>
