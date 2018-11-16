@@ -1,5 +1,6 @@
 <?php
 include 'includes/config.inc.php';
+include 'includes/helpers.inc.php';
 session_start();
 
 if (!empty($_SESSION['user'])) {
@@ -17,25 +18,53 @@ if (!empty($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Page</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <?php insertLinks(); ?>
 </head>
 <body>
+    <?php insertNavbar(); ?>
     <div class="container">
+        <div class="row py-5"></div>
         <div class="row">
-            <div class="col-md-12 py-5 text-center">
-                <a href="logout.php">Logout</a>
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form action="lib/EvaluationCreator.php" method="post" novalidate>
+                    <h4 class="text-center py-3">Course Evaluation</h4>
+                    <div class="form-group">
+                        <Label><strong>Course Roster</strong></Label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile"></label>
+                            <p class="form-alert text-right pt-1">* File must be a CSV file. ( .csv )</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <Label><strong>Course ID</strong></Label>
+                        <input type="text" class="form-control" name="course_id" required>
+                    </div>
+                    <div class="form-group">
+                        <Label><strong>Course Title</strong></Label>
+                        <input type="text" class="form-control" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <Label><strong>Section</strong></Label>
+                        <input type="text" class="form-control" name="section" required>
+                    </div>
+                    <div class="form-group">
+                        <Label><strong>Semester</strong></Label>
+                        <input type="text" class="form-control" name="semester" required>
+                    </div>
+                    <div class="form-group">
+                        <Label><strong>Year</strong></Label>
+                        <input type="text" class="form-control" name="year" required>
+                    </div>
+                    <div class="form-group pt-2 text-center">
+                        <button type="submit" class="btn btn-lg btn-dark btn-block">Submit</button>
+                    </div>
+                </form>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h3>Welcome, <?= $_SESSION['user']['first_name'] ?></h3>
-            </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
+    <script src="js/validation.js"></script>
 </body>
 </html>

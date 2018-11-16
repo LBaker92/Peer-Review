@@ -14,3 +14,13 @@
     right: 0;
     bottom: 0;
 }
+
+.form-alert {
+    color: red;
+    font-weight: bold;
+    font-size: .8rem;
+}
+
+.navbar-toggler {
+    padding: .3rem;
+}
