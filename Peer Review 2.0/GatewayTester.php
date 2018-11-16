@@ -100,26 +100,28 @@ include 'includes/config.inc.php';
         }
 
         echo '<h3>findByStudentID(1)</h3>';
-        $grades = $gradeGate->findByStudentID(1);
-        foreach ($grades as $grade) {
-            print_r($grade);
-            echo "<br/>";
-        }
+        $grade = $gradeGate->findByStudentID(1);
+        print_r($grade);
+        echo "<br/>";
 
         echo '<h3>findByGraderID(2)</h3>';
-        $grades = $gradeGate->findByGraderID(2);
-        foreach ($grades as $grade) {
-            print_r($grade);
-            echo "<br/>";
-        }
+        $grade = $gradeGate->findByGraderID(2);
+        print_r($grade);
+        echo "<br/>";
 
         echo '<h3>findByEvaluationID(1)</h3>';
-        $grades = $gradeGate->findByEvaluationID(1);
-        foreach ($grades as $grade) {
-            print_r($grade);
-            echo "<br/>";
-        }
+        $grade = $gradeGate->findByEvaluationID(1);
+        print_r($grade);
+        echo "<br/>";
         
+        echo '<h2>EvaluationTableGateway Tests';
+        $evalGate = new EvaluationTableGateway($dbAdapter);
+        echo '<h3>findAll()</h3>';
+        $evals = $evalGate->findAll();
+        foreach ($evals as $eval) {
+            print_r($eval);
+            echo '<br/>';
+        }
     ?>
 </body>
 </html>

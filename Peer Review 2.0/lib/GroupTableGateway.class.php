@@ -29,14 +29,8 @@ class GroupTableGateway extends TableDataGateway
 
     public function findByLeaderEmail($leaderEmail)
     {
-        $groupArray = $this->findBy("LeaderEmail = ?", $leaderEmail);
-        if (count($groupArray) > 0) {
-            // findBy returns an array, so we return the first index
-            return $groupArray[0];
-        }
-        else {
-            return NULL;
-        }
+        $sql = $this->getSelectStatement() . " WHERE LeaderEmail = ?";
+        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $leaderEmail));
     }
 }
 

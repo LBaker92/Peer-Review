@@ -29,14 +29,8 @@ class StudentTableGateway extends TableDataGateway
 
     public function findByEmail($email)
     {
-        $studentArray = $this->findBy("Email = ?", $email);
-        if (count($studentArray) > 0) {
-            // findBy returns an array, so we return the first index
-            return $studentArray[0];
-        }
-        else {
-            return NULL;
-        }
+        $sql = $this->getSelectStatement() . " WHERE Email = ?";
+        return $this->dbAdapter->fetchRow($sql, $email);
     }
 }
 

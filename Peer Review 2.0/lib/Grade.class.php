@@ -13,12 +13,6 @@ class Grade extends DomainObject
     {
         parent::__construct($data, $generateException);
     }
-
-    public function findByEvaluation($EvaluationID)
-    {
-        $sql = $this->getSelectStatement() . "WHERE EvaluationID = :eval";
-        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, array(':eval' => $EvaluationID)));
-    }
 }
 
 ?>

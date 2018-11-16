@@ -29,38 +29,19 @@ class GradeTableGateway extends TableDataGateway
 
     public function findByStudentID($studentID)
     {
-        $gradeArray = $this->findBy("StudentID = ?", $studentID);
-        if (count($gradeArray) > 0) {
-            // findBy returns an array, so we return the first index
-            return $gradeArray[0];
-        }
-        else {
-            return NULL;
-        }
+        $sql = $this->getSelectStatement() . " WHERE StudentID = ?";
+        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $studentID));
     }
 
     public function findByGraderID($graderID)
     {
-        $gradeArray = $this->findBy("GraderID = ?", $graderID);
-        if (count($gradeArray) > 0) {
-            // findBy returns an array, so we return the first index
-            return $gradeArray[0];
-        }
-        else {
-            return NULL;
-        }
+        $sql = $this->getSelectStatement() . " WHERE GraderID = ?";
+        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $graderID));
     }
-
     public function findByEvaluationID($evalID)
     {
-        $gradeArray = $this->findBy("EvaluationID = ?", $evalID);
-        if (count($gradeArray) > 0) {
-            // findBy returns an array, so we return the first index
-            return $gradeArray[0];
-        }
-        else {
-            return NULL;
-        }
+        $sql = $this->getSelectStatement() . " WHERE EvaluationID = ?";
+        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $evalID));
     }
 }
 
