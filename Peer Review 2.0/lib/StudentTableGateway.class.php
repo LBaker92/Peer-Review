@@ -32,6 +32,14 @@ class StudentTableGateway extends TableDataGateway
         $sql = $this->getSelectStatement() . " WHERE Email = ?";
         return $this->dbAdapter->fetchRow($sql, $email);
     }
+
+    public function insert($student)
+    {
+        $success = $this->dbAdapter->insert($this->getTableName(), $student->getFieldValues());
+        if (!$success) {
+            throw new PDOException;
+        }
+    }
 }
 
 ?>

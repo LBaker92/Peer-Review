@@ -138,6 +138,11 @@ abstract class DomainObject
         $xml .= '</' . $className . '>';
         return $xml;
     }
+    
+    public function getFieldValues()
+    {
+        return $this->fieldValues;
+    }
 }
 
 ?>

@@ -10,7 +10,7 @@ This is a concrete implementation of the Domain Model pattern.
 class Student extends DomainObject
 {
     static function getFieldNames() {
-        return array('StudentID', 'FirstName', 'LastName', 'Email', 'Password', "GroupID");
+        return array("StudentID", "FirstName", "LastName", "Email", "Password", "GroupID");
     }
 
     public function __construct(array $data, $generateExec)
@@ -21,10 +21,10 @@ class Student extends DomainObject
     public function getFullName($isCommaDelimited=false)
     {
         if ($isCommaDelimited) {
-            return $this->LastName . ', ' . $this->FirstName;
+            return $this->LastName . ", " . $this->FirstName;
         } 
         else {
-            return $this->LastName . ' ' . $this->FirstName;
+            return $this->LastName . " " . $this->FirstName;
         }
     }
 }

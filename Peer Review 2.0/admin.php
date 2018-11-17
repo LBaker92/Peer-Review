@@ -22,40 +22,40 @@ if (!empty($_SESSION['user'])) {
 </head>
 <body>
     <?php insertNavbar(); ?>
+    <pre>
+    <?php print_r($_SESSION["user"]); ?>
+    </pre>
     <div class="container">
         <div class="row py-5"></div>
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form action="lib/EvaluationCreator.php" method="post" novalidate>
+                <form class="needs-validated" action="lib/EvaluationCreator.php" method="post" enctype="multipart/form-data" novalidate>
                     <h4 class="text-center py-3">Course Evaluation</h4>
                     <div class="form-group">
                         <Label><strong>Course Roster</strong></Label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile"></label>
-                            <p class="form-alert text-right pt-1">* File must be a CSV file. ( .csv )</p>
-                        </div>
+                        <input class="form-control-file" type="file" name="roster" required>
+                        <p class="form-alert pt-1">* File must be a CSV file. ( .csv )</p>
                     </div>
                     <div class="form-group">
                         <Label><strong>Course ID</strong></Label>
-                        <input type="text" class="form-control" name="course_id" required>
+                        <input type="text" class="form-control" name="course_id" placeholder="CS-101" required>
                     </div>
                     <div class="form-group">
                         <Label><strong>Course Title</strong></Label>
-                        <input type="text" class="form-control" name="title" required>
+                        <input type="text" class="form-control" name="title" placeholder="Intro to Database System Design" required>
                     </div>
                     <div class="form-group">
                         <Label><strong>Section</strong></Label>
-                        <input type="text" class="form-control" name="section" required>
+                        <input type="text" class="form-control" name="section" placeholder="001" required>
                     </div>
                     <div class="form-group">
                         <Label><strong>Semester</strong></Label>
-                        <input type="text" class="form-control" name="semester" required>
+                        <input type="text" class="form-control" name="semester" placeholder="Fall" required>
                     </div>
                     <div class="form-group">
                         <Label><strong>Year</strong></Label>
-                        <input type="text" class="form-control" name="year" required>
+                        <input type="text" class="form-control" name="year" placeholder="2018" required>
                     </div>
                     <div class="form-group pt-2 text-center">
                         <button type="submit" class="btn btn-lg btn-dark btn-block">Submit</button>

@@ -26,6 +26,14 @@ class EvaluationTableGateway extends TableDataGateway
     {
         return "EvaluationID";
     }
+
+    public function insert($eval)
+    {
+        $success = $this->dbAdapter->insert($this->getTableName(), $eval->getFieldValues());
+        if (!$success) {
+            throw new PDOException;
+        }
+    }
 }
 
 ?>

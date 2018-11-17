@@ -33,12 +33,12 @@ if (!empty($_SESSION['user'])) {
                     <?php } else if (!empty($_SESSION['email'])) { ?>
                     <input type="text" class="form-control" name="email" id="email-field" value="<?= $_SESSION['email']; ?>" required>
                     <?php } else { ?>
-                    <input type="text" class="form-control" name="email" id="email-field" placeholder="Enter your email." required>
+                    <input type="text" class="form-inline form-control" name="email" id="email-field" placeholder="Enter your email." required>
                     <?php } ?>
                     <?php if (!empty($_SESSION['errors']['email'])) { ?>
-                    <div class="invalid-feedback"> * <?= $_SESSION['errors']['email'] ?> </div>
+                    <div class="d-inline invalid-feedback"><?= $_SESSION['errors']['email'] ?> </div>
                     <?php } else { ?>
-                    <div class="invalid-feedback"> * You must enter an email.</div>
+                    <div class="invalid-feedback">You must enter an email.</div>
                     <?php } ?>
                 </div>
                 <div class="form-group">
@@ -51,13 +51,13 @@ if (!empty($_SESSION['user'])) {
                     <input type="password" class="form-control" name="password" id="password-field" placeholder="Enter your password." required>
                     <?php } ?>
                     <?php if (!empty($_SESSION['errors']['password'])) { ?>
-                    <div class="invalid-feedback"> * <?= $_SESSION['errors']['password'] ?> </div>
+                    <div class="invalid-feedback"> <?= $_SESSION['errors']['password'] ?> </div>
                     <?php } else { ?>
-                    <div class="invalid-feedback"> * You must enter a password.</div>
+                    <div class="invalid-feedback"> You must enter a password.</div>
                     <?php } ?>
                 </div>
                 <div class="form-group pt-2 text-center">
-                    <button type="submit" class="btn btn-dark btn-lg">Submit</button>
+                    <button type="submit" class="btn btn-dark">Submit</button>
                 </div>
             </form>
         </div>
