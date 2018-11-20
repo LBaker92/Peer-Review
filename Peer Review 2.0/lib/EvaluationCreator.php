@@ -3,17 +3,13 @@ session_start();
 include "../includes/config.inc.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    print_R($_POST);
-    echo "<br/>";
     $rosterLoc = saveCSV($_FILES["roster"]);
     if ($rosterLoc) {
         $students = parseCSV($rosterLoc);
         $studentGate = new StudentTableGateway($dbAdapter);
+        // Loop through the students array, convert them to Student objects and insert into the DB
         foreach($students as $student) {
             $student = new Student($student, false);
-            echo "<pre>";
-            print_r($student);
-            echo "</pre>";
             $studentGate->insert($student);
         }
     }

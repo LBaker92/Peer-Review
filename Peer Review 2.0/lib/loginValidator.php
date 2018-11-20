@@ -52,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // If an instructor was found with that email
     else {
-        $_SESSION["email"] = $_POST["email"];
         // Check the password
         if ($instructor->Password == $_POST["password"]) {
             $_SESSION["user"] = $instructor->getFieldValues();
@@ -60,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../admin.php");
         }
         else {
+            $_SESSION["email"] = $_POST["email"];
             $_SESSION["errors"]["password"] = "Invalid password was entered.";
             header("Location: ../login.php");
         }
