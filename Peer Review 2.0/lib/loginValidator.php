@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($instructor->Password == $_POST["password"]) {
             $_SESSION["user"] = $instructor->getFieldValues();
             $_SESSION["user"]["admin"] = true;
-            header("Location: ../admin.php");
+            header("Location: ../admin/index.php");
         }
         else {
             $_SESSION["email"] = $_POST["email"];

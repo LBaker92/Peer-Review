@@ -17,10 +17,10 @@
                 <div class="collapse navbar-collapse" id="nav_content">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Course Evaluation</a>
+                            <a class="nav-link active" href="index.php">Course Evaluation</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">View Groups</a>
+                            <a class="nav-link" href="manager.php">Group Manager</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">TEST</a>
@@ -31,7 +31,7 @@
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="logout.php">Logout</a>
+                            <a class="nav-link" href="../logout.php">Logout</a>
                         </li>
                     </ul>
                 </div>

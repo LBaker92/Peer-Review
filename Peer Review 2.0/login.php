@@ -5,7 +5,7 @@ session_start();
 // If the user already has a session
 if (!empty($_SESSION['user'])) {
     if ($_SESSION['user']['admin']) {
-        header('Location: admin.php');
+        header('Location: admin/index.php');
     }
     else {
         header('Location: student.php');
