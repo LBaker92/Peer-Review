@@ -19,6 +19,7 @@ if (!empty($_SESSION['user'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Page</title>
     <?php insertLinks(); ?>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <?php insertNavbar(); ?>

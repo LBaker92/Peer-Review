@@ -30,15 +30,12 @@ class StudentTableGateway extends TableDataGateway
     public function findByEmail($email)
     {
         $sql = $this->getSelectStatement() . " WHERE Email = ?";
-        return $this->dbAdapter->fetchRow($sql, $email);
+        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $email));
     }
 
-    public function insert($student)
-    {
-        $success = $this->dbAdapter->insert($this->getTableName(), $student->getFieldValues());
-        if (!$success) {
-            throw new PDOException;
-        }
+    public function setGroupID($studentID, $id) {
+        $sql = "UPDATE " . $this->getTableName() . " SET GroupID = ? WHERE StudentID = ?";
+        $this->dbAdapter->runQuery($sql, Array($id, $studentID));
     }
 }
 

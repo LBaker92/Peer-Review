@@ -101,6 +101,13 @@ abstract class TableDataGateway
         return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, array(':id' => $id)));
     }
 
+    public function insert($domainObject) {
+        $success = $this->dbAdapter->insert($this->getTableName(), $domainObject->getFieldValues());
+        if (!$success) {
+            throw new PDOException;
+        }
+    }
+
     // ***********************************************************
     // HELPERS
     // ***********************************************************

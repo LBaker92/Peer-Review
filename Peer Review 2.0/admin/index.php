@@ -1,5 +1,4 @@
 <?php
-include '../includes/config.inc.php';
 include '../includes/helpers.inc.php';
 session_start();
 
@@ -19,6 +18,7 @@ if (!empty($_SESSION['user'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Page</title>
     <?php insertLinks(); ?>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <?php insertNavbar(); ?>
@@ -30,7 +30,7 @@ if (!empty($_SESSION['user'])) {
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <form class="needs-validated" action="../lib/EvaluationCreator.php" method="post" enctype="multipart/form-data" novalidate>
+                <form class="needs-validation" action="../lib/EvaluationCreator.php" method="post" enctype="multipart/form-data" novalidate>
                     <h4 class="text-center py-3">Course Evaluation</h4>
                     <div class="form-group">
                         <Label><strong>Course Roster</strong></Label>
@@ -65,6 +65,6 @@ if (!empty($_SESSION['user'])) {
             <div class="col-md-2"></div>
         </div>
     </div>
-    <script src="js/validation.js"></script>
+    <script src="../js/validation.js"></script>
 </body>
 </html>

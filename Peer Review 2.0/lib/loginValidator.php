@@ -1,5 +1,4 @@
 <?php
-
 include "../includes/config.inc.php";
 session_start();
 
@@ -38,10 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         // If a student was found with that email
         else {
+            print_r($student);
             if ($student->Password == $_POST["password"]) {
                 $_SESSION["user"] = $student->getFieldValues();
                 $_SESSION["user"]["admin"] = false;
-                header("Location: ../student.php");
+                header("Location: ../student/index.php");
             }
             else {
                 $_SESSION["email"] = $_POST["email"];

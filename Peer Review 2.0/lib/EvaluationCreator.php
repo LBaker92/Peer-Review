@@ -24,6 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
     $eval = new Evaluation($eval, false);
     $evalGate->insert($eval);
+    // ADD SUCCESS OR FAIL MESSAGE AND REDIRECT
+    header("Location: ../admin/index.php");
 }
 
 function saveCSV($filename) 

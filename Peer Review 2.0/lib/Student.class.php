@@ -21,10 +21,10 @@ class Student extends DomainObject
     public function getFullName($isCommaDelimited=false)
     {
         if ($isCommaDelimited) {
-            return $this->LastName . ", " . $this->FirstName;
+            return $this->FirstName . ", " . $this->LastName;
         } 
         else {
-            return $this->LastName . " " . $this->FirstName;
+            return $this->FirstName . " " . $this->LastName;
         }
     }
 }

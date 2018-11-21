@@ -8,7 +8,7 @@ if (!empty($_SESSION['user'])) {
         header('Location: admin/index.php');
     }
     else {
-        header('Location: student.php');
+        header('Location: student/index.php');
     }
 }
 ?>
@@ -21,6 +21,7 @@ if (!empty($_SESSION['user'])) {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Login</title>
         <?php insertLinks(); ?>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div class="login-box">
@@ -29,11 +30,11 @@ if (!empty($_SESSION['user'])) {
                 <div class="form-group">
                     <label for="email-field"><strong>Email</strong></label>
                     <?php if (!empty($_SESSION['errors']['email'])) { ?>
-                    <input type="text" class="form-control is-invalid" name="email" id="email-field" placeholder="Enter your email." required>
+                    <input type="email" class="form-control is-invalid" name="email" id="email-field" placeholder="Enter your email." required>
                     <?php } else if (!empty($_SESSION['email'])) { ?>
-                    <input type="text" class="form-control" name="email" id="email-field" value="<?= $_SESSION['email']; ?>" required>
+                    <input type="email" class="form-control" name="email" id="email-field" value="<?= $_SESSION['email']; ?>" required>
                     <?php } else { ?>
-                    <input type="text" class="form-inline form-control" name="email" id="email-field" placeholder="Enter your email." required>
+                    <input type="email" class="form-inline form-control" name="email" id="email-field" placeholder="Enter your email." required>
                     <?php } ?>
                     <?php if (!empty($_SESSION['errors']['email'])) { ?>
                     <div class="d-inline invalid-feedback"><?= $_SESSION['errors']['email'] ?> </div>
