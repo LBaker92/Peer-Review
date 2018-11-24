@@ -8,10 +8,10 @@ if (!empty($_SESSION["user"])) {
         // Redirect an admin back to the admin page
         header("Location: ../admin/index.php");
     }
-    // If user is already in a group
-    if (!empty($_SESSION["user"]["GroupID"])) {
-        header("Location: evaluation.php");
-    }
+    // // If user is already in a group
+    // if (!empty($_SESSION["user"]["GroupID"])) {
+    //     header("Location: evaluation.php");
+    // }
 }
 else {
     header("Location: ../login.php");

@@ -1,7 +1,8 @@
 <?php
 include "../includes/helpers.inc.php";
 session_start();
-//print_r($_SESSION["user"]);
+
+print_r($_SESSION["user"]);
 
 $groupGate = new GroupTableGateway($dbAdapter);
 $studentGate = new StudentTableGateway($dbAdapter);
@@ -29,7 +30,10 @@ $criterias = $criteriaGate->findAll();
             <div class="col-md-0"></div>
             <div class="col-md-12 table-responsive-md">
                 <h2 class="text-center mb-4">Evaluations</h2>
-                <form class="needs-validation" action="lib/EvaluationValidator.php" method="post" novalidate>
+                <form class="needs-validation" action="../lib/EvaluationValidator.php" method="post" novalidate>
+                <?php if (!empty($_SESSION["errors"]["input"])) { ?>
+                    <p class="form-alert">* <?= $_SESSION["errors"]["input"] ?></p>
+                <?php } ?>
                     <?php foreach($students as $student) { ?>
                         <table class="table table-bordered group-data">
                             <thead>
@@ -45,7 +49,11 @@ $criterias = $criteriaGate->findAll();
                                 </tr>
                                 <tr>
                                 <?php foreach($criterias as $criteria) { ?>
-                                    <td><input class="form-control" type="number" name="<?= $criteria->Title ?>" min="0" max="10"></td>
+                                <?php   if (!empty($_SESSION["errors"]["input"])) { ?>
+                                    <td><input class="form-control is-invalid" type="number" name="<?= $criteria->Title . $student->StudentID ?>" min="0" max="10" placeholder="Value between 0-10"></td>
+                                  <?php } else {?>
+                                    <td><input class="form-control" type="number" name="<?= $criteria->Title . $student->StudentID ?>" min="0" max="10" pplaceholder="Value between 0-10"></td>
+                                    <?php } ?>
                                 <?php } ?>
                                 </tr>
                             </tbody>

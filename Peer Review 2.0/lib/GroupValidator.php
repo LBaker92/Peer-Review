@@ -2,7 +2,10 @@
 include '../includes/config.inc.php';
 session_start();
 
-unset($_SESSION["errors"]);
+unset($_SESSION["errors"]["title"]);
+unset($_SESSION["errors"]["description"]);
+unset($_SESSION["errors"]["leader"]);
+unset($_SESSION["errors"]["memberIDs"]);
 ?>
 
 <?php

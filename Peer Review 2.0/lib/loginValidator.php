@@ -2,7 +2,8 @@
 include "../includes/config.inc.php";
 session_start();
 
-unset($_SESSION["errors"]);
+unset($_SESSION["errors"]["email"]);
+unset($_SESSION["errors"]["password"]);
 unset($_SESSION["email"]);
 unset($_SESSION["password"]);
 
