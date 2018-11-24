@@ -3,9 +3,8 @@ include '../includes/helpers.inc.php';
 session_start();
 
 if (!empty($_SESSION['user'])) {
-    // Redirect a student back to the student page
     if (!$_SESSION['user']['admin']) {
-        header('Location: ../student.php');
+        header('Location: student/index.php');
     }
 }
 ?>
@@ -22,9 +21,6 @@ if (!empty($_SESSION['user'])) {
 </head>
 <body>
     <?php insertNavbar(); ?>
-    <pre>
-    <?php //print_r($_SESSION["user"]); ?>
-    </pre>
     <div class="container">
         <div class="row py-5"></div>
         <div class="row">

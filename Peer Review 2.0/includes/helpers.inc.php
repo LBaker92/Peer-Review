@@ -45,18 +45,25 @@
     <?php $dbAdapter = DatabaseAdapterFactory::create('PDO', array(DBCONNECTION, DBUSER, DBPASS)); ?>
     <?php $studentGate = new StudentTableGateway($dbAdapter); ?>
     <?php $students = $studentGate->findby("GroupID IS NULL"); ?>
-    <?php
-        $index = 0;
-        $numOfCols = (int)(count($students) / 10);
-        for($i = 0; $i < $numOfCols; $i++) {
-    ?>
-            <select class="custom-select mx-2" name="memberIDs[]" size="10" multiple>
-            <?php for($j = 0; $j < 10; $j++) { ?>
-                <option value="<?= $students[$index]->StudentID ?>"><?= $students[$index]->getFullName(); ?></option>
-            <?php $index++; ?>
-            <?php } ?>
-            </select>
-    <?php
-        }
-    ?>
+    <div class="row">
+        <?php
+            $done = false;
+            $index = 0;
+            $numOfCols = (int)(count($students));
+            while(!$done) {
+        ?>
+            <div class="col-md-3">
+                <select class="custom-select mb-2" name="memberIDs[]" size="10" multiple>
+                <?php for($j = 0; $j < 10; $j++) { ?>
+                <?php if ($index == count($students)) { // We printed all students
+                    $done = true; 
+                    break; }
+                ?>
+                    <option value="<?= $students[$index]->StudentID ?>"><?= $students[$index]->getFullName(); ?></option>
+                <?php $index++; ?>
+                <?php } ?>
+                </select>
+            </div>
+        <?php } ?>
+    </div>
 <?php } ?>

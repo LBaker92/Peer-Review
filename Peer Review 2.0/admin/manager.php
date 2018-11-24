@@ -1,5 +1,4 @@
 <?php
-include '../includes/config.inc.php';
 include '../includes/helpers.inc.php';
 session_start();
 

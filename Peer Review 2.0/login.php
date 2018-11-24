@@ -39,7 +39,7 @@ if (!empty($_SESSION['user'])) {
                     <?php if (!empty($_SESSION['errors']['email'])) { ?>
                     <div class="d-inline invalid-feedback"><?= $_SESSION['errors']['email'] ?> </div>
                     <?php } else { ?>
-                    <div class="invalid-feedback">You must enter an email.</div>
+                    <div class="invalid-feedback">You must enter a valid email address.</div>
                     <?php } ?>
                 </div>
                 <div class="form-group">
