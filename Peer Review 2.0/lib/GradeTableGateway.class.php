@@ -30,18 +30,35 @@ class GradeTableGateway extends TableDataGateway
     public function findByStudentID($studentID)
     {
         $sql = $this->getSelectStatement() . " WHERE StudentID = ?";
-        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $studentID));
+        return $this->convertRecordsToObjects($this->dbAdapter->fetchAsArray($sql, $studentID));
     }
 
     public function findByGraderID($graderID)
     {
         $sql = $this->getSelectStatement() . " WHERE GraderID = ?";
-        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $graderID));
+        return $this->convertRecordsToObjects($this->dbAdapter->fetchAsArray($sql, $graderID));
     }
     public function findByEvaluationID($evalID)
     {
         $sql = $this->getSelectStatement() . " WHERE EvaluationID = ?";
-        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $evalID));
+        return $this->convertRecordsToObjects($this->dbAdapter->fetchAsArray($sql, $evalID));
+    }
+
+    public function update($grade)
+    {
+        $fieldsToUpdate = array(
+            "Participation" => $grade->Participation,
+            "Contribution" => $grade->Contribution,
+            "Attendance" => $grade->Attendance,
+            "Supportiveness" => $grade->Supportiveness,
+            "Communication" => $grade->Communication
+        );
+
+        $this->dbAdapter->update($this->getTableName(),
+                                 $fieldsToUpdate,
+                                 "StudentID = :studentID",
+                                 array(":studentID" => $grade->StudentID)
+                                );
     }
 }
 

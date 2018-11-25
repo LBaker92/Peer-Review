@@ -62,7 +62,8 @@ unset($_SESSION["errors"]["memberIDs"]);
                     $student= $studentGate->findByID($memberID); 
                     $studentGate->setGroupID($student->StudentID, $group->GroupID);
                 }
-                header("Location: evaluation.php");
+                $_SESSION["user"]["GroupID"] = $group->GroupID;
+                header("Location: ../student/evaluation.php");
             }
             // Validation failed
             else {

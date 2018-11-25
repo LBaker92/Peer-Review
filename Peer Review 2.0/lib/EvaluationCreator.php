@@ -3,16 +3,7 @@ session_start();
 include "../includes/config.inc.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $rosterLoc = saveCSV($_FILES["roster"]);
-    if ($rosterLoc) {
-        $students = parseCSV($rosterLoc);
-        $studentGate = new StudentTableGateway($dbAdapter);
-        // Loop through the students array, convert them to Student objects and insert into the DB
-        foreach($students as $student) {
-            $student = new Student($student, false);
-            $studentGate->insert($student);
-        }
-    }
+
     $evalGate = new EvaluationTableGateway($dbAdapter);
     $eval = array(
         "CourseID" => $_POST["course_id"],
@@ -22,8 +13,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "Year" => $_POST["year"],
         "InstructorID" => $_SESSION["user"]["InstructorID"]
     );
+    
     $eval = new Evaluation($eval, false);
     $evalGate->insert($eval);
+    $eval = $evalGate->findByEval($eval);
+
+    $rosterLoc = saveCSV($_FILES["roster"]);
+    if ($rosterLoc) {
+        $students = parseCSV($rosterLoc, $eval);
+        $studentGate = new StudentTableGateway($dbAdapter);
+        // Loop through the students array, convert them to Student objects and insert into the DB
+        foreach($students as $student) {
+            $student = new Student($student, false);
+            $studentGate->insert($student);
+        }
+    }
     // ADD SUCCESS OR FAIL MESSAGE AND REDIRECT
     header("Location: ../admin/index.php");
 }
@@ -43,7 +47,7 @@ function saveCSV($filename)
     CSV format should be [0]LastName, [1]FirstName, [2]Username
 */
 
-function parseCSV($fileLoc) 
+function parseCSV($fileLoc, $eval) 
 {
     $students = array();
     $file = fopen($fileLoc, "r") or die("ERROR OPENING FILE");
@@ -56,7 +60,8 @@ function parseCSV($fileLoc)
                 "FirstName" => $row[1],
                 "LastName" => $row[0],
                 "Email" => convertToEmail($row[2]),
-                "Password" => generatePassword($row)
+                "Password" => generatePassword($row),
+                "EvaluationID" => $eval->EvaluationID
             );
             array_push($students, $student);
         }

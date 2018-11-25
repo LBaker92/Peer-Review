@@ -92,7 +92,19 @@ insert into groups
 values (NULL, "Test Project", "This is a test project.", "johndoe@kent.edu");
 
 insert into gradecriteria
-values ("Participation", "Did he/she participate in group conversation?", 0.25);
+values ("Participation", "Did he/she participate in group conversation?");
+
+insert into gradecriteria
+values ("Contribution", "Did he/she contribute to the project?");
+
+insert into gradecriteria
+values ("Attendance", "Did he/she attend group meetings?");
+
+insert into gradecriteria
+values ("Supportiveness", "Was he/she available to help other members?");
+
+insert into gradecriteria
+values ("Communication", "Did he/she communicate well with the group?");
 
 insert into evaluations
 values (NULL, "CS-101", "Intro to Databases", 001, "Fall", 2018, 1);

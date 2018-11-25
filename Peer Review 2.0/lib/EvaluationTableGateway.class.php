@@ -27,6 +27,16 @@ class EvaluationTableGateway extends TableDataGateway
         return "EvaluationID";
     }
 
+    public function findByEval($eval)
+    {
+        $test = $this->findBy("CourseID = ? and Section = ? and Year = ?", array(
+            $eval->CourseID,
+            $eval->Section,
+            $eval->Year
+        ))[0];
+        return $test;
+    }
+
     public function insert($eval)
     {
         $success = $this->dbAdapter->insert($this->getTableName(), $eval->getFieldValues());

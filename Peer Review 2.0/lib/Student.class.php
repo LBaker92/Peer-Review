@@ -10,7 +10,7 @@ This is a concrete implementation of the Domain Model pattern.
 class Student extends DomainObject
 {
     static function getFieldNames() {
-        return array("StudentID", "FirstName", "LastName", "Email", "Password", "GroupID");
+        return array("StudentID", "FirstName", "LastName", "Email", "Password", "GroupID", "EvaluationID");
     }
 
     public function __construct(array $data, $generateExec)

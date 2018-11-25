@@ -4,7 +4,7 @@ class GradeCriteria extends DomainObject
 {
     static function getFieldNames()
     {
-        return array("Title", "Description", "Weight");
+        return array("Title", "Description");
     }
 
     public function __construct(array $data, $generateException)
