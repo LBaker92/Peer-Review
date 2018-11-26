@@ -66,3 +66,7 @@ input:-webkit-autofill:active {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
 }
+
+.fa-crown {
+    color: rgb(243, 207, 0);
+}

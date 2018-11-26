@@ -22,12 +22,12 @@ if (!empty($_SESSION['user'])) {
 <body>
     <?php insertNavbar(); ?>
     <div class="container">
-        <div class="row py-5"></div>
+        <div class="row mt-3"></div>
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <form class="needs-validation" action="../lib/EvaluationCreator.php" method="post" enctype="multipart/form-data" novalidate>
-                    <h4 class="text-center py-3">Course Evaluation</h4>
+                    <h4 class="text-center mb-3">Course Evaluation</h4>
                     <div class="form-group">
                         <Label><strong>Course Roster</strong></Label>
                         <input class="form-control-file" type="file" name="roster" required>
