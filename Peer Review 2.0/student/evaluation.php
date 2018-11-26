@@ -39,14 +39,6 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                     <p class="form-alert">* <?= $_SESSION["errors"]["input"] ?></p>
                 <?php } ?>
                     <?php foreach($students as $student) { ?>
-                    <?php
-                            $alreadyGraded = false;
-                            foreach($grades as $grade) {
-                                if ($grade->StudentID == $student->StudentID) {
-                                    
-                                }
-                            }
-                    ?>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -67,7 +59,7 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                                             name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
                                             min="0" max="10" placeholder="Value between 0-10">
                                     </td>
-                                  <?php } else {?>
+                                  <?php } else { ?>
                                     <td><input class="form-control" 
                                                 type="number" name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
                                                 min="0" max="10" pplaceholder="Value between 0-10"></td>
