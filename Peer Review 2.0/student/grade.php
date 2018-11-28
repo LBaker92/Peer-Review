@@ -62,21 +62,35 @@ else { $letterGrade = "F"; }
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12 text-center mt-5">
+            <?php if (count($grades) < count($students)) { ?>
                 <h3 class="mt-5">Your current grade: </h3>
-                <h1 class="display-1 font-weight-bold d-inline-block"><?= $letterGrade ?></h1>
-                <h3 class="d-inline-block"><?= $gradeSummary . "%" ?></h3>
-                <?php if (count($grades) < count($students)) { ?>
-                <p>* This is not your final grade.
-                <br/>
-                <strong><?= count($grades) ?>/<?= count($students) ?></strong> of your group members have finished their evaluations.</p>
-                <?php } ?>
+                <h1 class="mt-3 d-inline-block display-1 font-weight-bold"><?= $letterGrade ?></h1>
+                <h3 class="display-4">(<?= $gradeSummary . "%" ?>)</h3>
+                <p class="text-center">
+                    <br/>
+                    <strong>This is not your final grade.</strong>
+                    <br/>
+                    <strong><?= count($grades) ?>/<?= count($students) ?></strong> of your group members have finished their evaluations.
+                    <br/>
+                    Your final grade will be determined when all group members have finished their evaluations.
+                </p>
+            <?php } else { ?>
+                <h3 class="mt-5">Your final grade: </h3>
+                <h1 class="mt-3 d-inline-block display-1 font-weight-bold"><?= $letterGrade ?></h1>
+                <h3 class="display-4">(<?= $gradeSummary . "%" ?>)</h3>
+            <?php } ?>
             </div>
         </div>
-        <!-- <div class="row">
-            <div class="col-md-12 text-center mt-3">
-                <p><a href="../reevaluate.php">Click here</a> to reevaluate your group members.</p>
-            </div>
-        </div> -->
+    <div class="row">
+        <div class="col-md-12 text-center mt-3">
+            <p class="mt-5">
+                Did you make a mistake while grading? 
+                <br/>
+                <small>(Definitely not trying to get back at your group for giving you a bad grade?)</small>
+            </p>
+            <button class="btn btn-dark btn-lg" id="reeval"><a href="../reevaluate.php">Resubmit Evaluation</a></button>
+        </div>
+    </div>
     </div>
 </body>
 </html>

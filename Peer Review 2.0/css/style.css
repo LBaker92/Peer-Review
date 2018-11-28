@@ -70,3 +70,13 @@ input:-webkit-autofill:active {
 .fa-crown {
     color: rgb(243, 207, 0);
 }
+
+#reeval a {
+    color: white;
+    text-decoration: none;
+}
+
+#reeval a:hover {
+    color: grey;
+    transition: all ease .25s;
+}

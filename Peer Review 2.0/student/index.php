@@ -83,8 +83,8 @@ else {
                     <?php } else { ?>
                     <div class="form-group">
                         <label><strong>Group Members</strong></label>
-                        <small class="d-block">* Hold ctrl / cmd and click to select more than one member.</small>
-                        <small class="d-block">* Do not exceed 5 group members.</small>
+                        <small class="d-block"><strong>* Hold ctrl / cmd and click to select more than one member.</strong></small>
+                        <small class="d-block"><strong>* Do not exceed 5 group members.</strong></small>
                         <?php insertGrouplessStudents(); ?>
                     </div>
                     <?php } ?>
@@ -96,6 +96,6 @@ else {
             <div class="col-md-2"></div>
         </div>
     </div>
-    <!-- <script src="../js/validation.js"></script> -->
+    <script src="../js/validation.js"></script>
 </body>
 </html>
