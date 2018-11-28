@@ -1,4 +1,8 @@
-<?php include 'config.inc.php'; ?>
+<?php 
+include 'config.inc.php'; 
+
+?>
+
 
 <?php function insertLinks() { ?>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -17,21 +21,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="nav_content">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="index.php">Course Evaluation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="manager.php">Group Manager</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">TEST</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">TEST</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="../logout.php">Logout</a>
                         </li>

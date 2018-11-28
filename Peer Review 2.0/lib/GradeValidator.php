@@ -72,7 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    //REDIRECT TO GRADE DISPLAY SCREEN
+    $_SESSION["user"]["graded"] = true;
+    header("Location: ../student/grade.php");
 }
 
 ?>

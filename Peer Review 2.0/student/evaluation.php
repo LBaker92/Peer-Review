@@ -2,6 +2,11 @@
 include "../includes/helpers.inc.php";
 session_start();
 
+if (!empty($_SESSION["user"]["graded"])) {
+    header("Location: grade.php");
+    exit();
+}
+
 $groupGate = new GroupTableGateway($dbAdapter);
 $studentGate = new StudentTableGateway($dbAdapter);
 $criteriaGate = new GradeCriteriaTableGateway($dbAdapter);
@@ -11,8 +16,6 @@ $group = $groupGate->findById($_SESSION["user"]["GroupID"]);
 $students = $studentGate->findByGroupID($group->GroupID);
 $criterias = $criteriaGate->findAll();
 $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
-
-
 
 ?>
 
@@ -39,6 +42,7 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                 <?php } ?>
                     <h4><?= $group->ProjectName ?></h4>
                     <p><?= $group->ProjectDescription ?></p>
+                    <p><strong>* You must enter values between 0-10.</strong></p>
                     <?php foreach($students as $student) { ?>
                         <table class="table table-bordered">
                             <thead>
@@ -79,7 +83,7 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                         </table>
                     <?php } ?>
                     <div class="form-group text-center">
-                    <button type="submit" class="btn btn-lg btn-block btn-dark mt-4">Submit</button>
+                        <button type="submit" class="btn btn-lg btn-block btn-dark mt-4">Submit</button>
                     </div>
                 </form>
             </div>

@@ -1,6 +1,9 @@
 <?php
 session_start();
 include "../includes/config.inc.php";
+foreach(glob("PHPMailer/src/") as $fileName) {
+    include $fileName;
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -28,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $studentGate->insert($student);
         }
     }
-    // ADD SUCCESS OR FAIL MESSAGE AND REDIRECT
     header("Location: ../admin/index.php");
 }
 

@@ -23,5 +23,4 @@ spl_autoload_register(function ($class) {
 });
 
 $dbAdapter = DatabaseAdapterFactory::create('PDO', array(DBCONNECTION, DBUSER, DBPASS));
-
 ?>
