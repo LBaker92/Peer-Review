@@ -56,9 +56,10 @@ class GradeTableGateway extends TableDataGateway
 
         $this->dbAdapter->update($this->getTableName(),
                                  $fieldsToUpdate,
-                                 "StudentID = :studentID",
-                                 array(":studentID" => $grade->StudentID)
-                                );
+                                 "StudentID = :studentID and GraderID = :graderID",
+                                 array(":studentID" => $grade->StudentID,
+                                        ":graderID" => $grade->GraderID
+                                ));
     }
 }
 

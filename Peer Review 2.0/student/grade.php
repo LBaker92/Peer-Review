@@ -14,21 +14,22 @@ $students = $studentGate->findByGroupID($_SESSION["user"]["GroupID"]);
 $grades = $gradeGate->findBy("StudentID = ? and EvaluationID = ?", array($_SESSION["user"]["StudentID"], 
                                                                          $_SESSION["user"]["EvaluationID"]));
 
-$gradeTotal = 0;
-$sumOfGrades = 0;
-$gradeMax = count($grades) * 10;
+$gradeAvgTotal = 0;
+$gradeAvgMax = count($grades) * 10;
 $numOfGrades = count($grades);
 foreach ($grades as $grade) {
     // Access the fieldValues array inside the grade object.
     $fields = $grade->getFieldValues();
+    // Sum up all of the values in each row of the student's grades
+    $sumOfGrades = 0;
     foreach ($criterias as $criteria) {
         $sumOfGrades += $fields[$criteria->Title];
     }
-    $gradeAvg = $sumOfGrades / count($criterias);
-
-    $gradeTotal += $gradeAvg;
+    $rowAvg = $sumOfGrades / count($criterias);
+    $gradeAvgTotal += $rowAvg;
 }
-$gradeSummary = $gradeTotal / $gradeMax * 100;
+$gradeSummary = $gradeAvgTotal / $gradeAvgMax;
+$gradeSummary *= 100;
 
 $letterGrade = "";
 if ($gradeSummary >= 100) { $letterGrade = "A+"; }

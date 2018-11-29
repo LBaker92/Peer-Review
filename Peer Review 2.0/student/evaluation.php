@@ -49,6 +49,8 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                                 <tr>
                                     <?php if ($student->Email == $group->LeaderEmail) { ?>
                                     <th colspan="<?= count($criterias) ?>"><i class="fas fa-crown"></i> <?= $student->getFullName(); ?> ( Group Leader )</th>
+                                    <?php } else if ($student->StudentID == $_SESSION["user"]["StudentID"]) { ?>
+                                    <th style="background: rgba(255,0,0,.25); font-style: italic;" colspan="<?= count($criterias) ?>">* <?= $student->getFullName(); ?> ( You )</th>
                                     <?php } else { ?>
                                     <th colspan="<?= count($criterias) ?>"><?= $student->getFullName(); ?></th>
                                     <?php } ?>
