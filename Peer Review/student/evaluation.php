@@ -37,20 +37,24 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
             <div class="col-md-12 table-responsive-md">
                 <h2 class="text-center mb-4">Evaluations</h2>
                 <form class="needs-validation" action="../lib/GradeValidator.php" method="post" novalidate>
-                <?php if (!empty($_SESSION["errors"]["input"])) { ?>
-                    <p class="form-alert">* <?= $_SESSION["errors"]["input"] ?></p>
-                <?php } ?>
                     <h4><?= $group->ProjectName ?></h4>
                     <p><?= $group->ProjectDescription ?></p>
-                    <p><strong>* You must enter values between 0-10.</strong></p>
+                    <p class="d-inline"><strong>* You must enter values between 0-10.</strong></p>
+                    <?php if (!empty($_SESSION["errors"]["input"])) { ?>
+                    <p class="form-alert mb-2">* <?= $_SESSION["errors"]["input"] ?></p>
+                    <?php } ?>
                     <?php foreach($students as $student) { ?>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <?php if ($student->Email == $group->LeaderEmail) { ?>
-                                    <th colspan="<?= count($criterias) ?>"><i class="fas fa-crown"></i> <?= $student->getFullName(); ?> ( Group Leader )</th>
+                                    <?php if ($student->StudentID == $_SESSION["user"]["StudentID"]) { ?>
+                                        <th style="background: rgba(0,0,0,0.1); font-style: italic;" colspan="<?= count($criterias) ?>"><i class="fas fa-crown"></i> <?= $student->getFullName(); ?> ( Group Leader ) ( You )</th>
+                                    <?php   } else { ?>
+                                        <th colspan="<?= count($criterias) ?>"><i class="fas fa-crown"></i> <?= $student->getFullName(); ?> ( Group Leader )</th>
+                                    <?php } ?>
                                     <?php } else if ($student->StudentID == $_SESSION["user"]["StudentID"]) { ?>
-                                    <th style="background: lightgrey; font-style: italic;" colspan="<?= count($criterias) ?>">* <?= $student->getFullName(); ?> ( You )</th>
+                                    <th style="background: rgba(0,0,0,0.1); font-style: italic;" colspan="<?= count($criterias) ?>">* <?= $student->getFullName(); ?> ( You )</th>
                                     <?php } else { ?>
                                     <th colspan="<?= count($criterias) ?>"><?= $student->getFullName(); ?></th>
                                     <?php } ?>

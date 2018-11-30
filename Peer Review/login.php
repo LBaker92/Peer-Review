@@ -6,9 +6,11 @@ session_start();
 if (!empty($_SESSION['user'])) {
     if ($_SESSION['user']['admin']) {
         header('Location: admin/index.php');
+        exit();
     }
     else {
         header('Location: student/index.php');
+        exit();
     }
 }
 ?>

@@ -67,10 +67,6 @@ input:-webkit-autofill:active {
     background: transparent; /* make scrollbar transparent */
 }
 
-.fa-crown {
-    color: rgb(243, 207, 0);
-}
-
 #reeval a {
     color: white;
     text-decoration: none;

@@ -6,6 +6,7 @@ if (!empty($_SESSION['user'])) {
     // Redirect a student back to the student page
     if (!$_SESSION['user']['admin']) {
         header('Location: ../student.php');
+        exit();
     }
 }
 ?>
@@ -30,7 +31,7 @@ if (!empty($_SESSION['user'])) {
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <p>test</p>
+                <p>SUCCESS!</p>
             </div>
             <div class="col-md-2"></div>
         </div>

@@ -7,14 +7,17 @@ if (!empty($_SESSION["user"])) {
     if ($_SESSION["user"]["admin"]) {
         // Redirect an admin back to the admin page
         header("Location: ../admin/index.php");
+        exit();
     }
     // If user is already in a group
     if (!empty($_SESSION["user"]["GroupID"])) {
         header("Location: evaluation.php");
+        exit();
     }
 }
 else {
     header("Location: ../login.php");
+    exit();
 }
 ?>
 

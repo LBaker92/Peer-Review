@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $studentGate->insert($student);
         }
     }
-    header("Location: ../admin/index.php");
+    header("Location: ../admin/manager.php");
 }
 
 function saveCSV($filename) 

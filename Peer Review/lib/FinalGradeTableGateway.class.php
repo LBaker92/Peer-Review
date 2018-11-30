@@ -31,13 +31,7 @@ class FinalGradeTableGateway extends TableDataGateway
     public function findByStudentID($studentID)
     {
         $sql = $this->getSelectStatement() . " WHERE StudentID = ?";
-        return $this->convertRecordsToObjects($this->dbAdapter->fetchAsArray($sql, $studentID));
-    }
-
-    public function findByEvaluationID($evalID)
-    {
-        $sql = $this->getSelectStatement() . " WHERE EvaluationID = ?";
-        return $this->convertRecordsToObjects($this->dbAdapter->fetchAsArray($sql, $evalID));
+        return $this->convertRowToObject($this->dbAdapter->fetchrow($sql, $studentID));
     }
 
     public function update($finalGrade)

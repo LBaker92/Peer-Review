@@ -24,18 +24,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (empty($grade)) {
                 $_SESSION["errors"]["input"] = "You left a field empty.";
                 header("Location: ../student/evaluation.php");
-                $error = true;
-                break;
+                exit();
             }
             if ($grade < 0 || $grade > 10) {
                 $_SESSION["errors"]["input"] = "Grade values must be between 0-10";
                 header("Location: ../student/evaluation.php");
-                $error = true;
-                break;
+                exit();
             }
         }
     }
-
+    
+    // Insert each student's grade into the Grade table
+    // Also insert/update final grade 
     foreach($students as $student) {
         $gradedArray = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
         $grade = array(
@@ -70,6 +70,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             else {
                 $gradeGate->update($grade);
             }
+        }
+        
+        $grades = $gradeGate->findBy("StudentID = ? and EvaluationID = ?", array($student->StudentID, $student->EvaluationID));
+
+        $gradeAvgTotal = 0;
+        $gradeAvgMax = count($grades) * 10;
+        $numOfGrades = count($grades);
+        foreach ($grades as $grade) {
+        // Access the fieldValues array inside the grade object.
+        $fields = $grade->getFieldValues();
+        // Sum up all of the values in each row of the student's grades
+        $sumOfGrades = 0;
+        foreach ($criterias as $criteria) {
+        $sumOfGrades += $fields[$criteria->Title];
+        }
+        $rowAvg = $sumOfGrades / count($criterias);
+        $gradeAvgTotal += $rowAvg;
+        }
+        $gradeSummary = $gradeAvgTotal / $gradeAvgMax;
+        $gradeSummary *= 100;
+
+        $finalGradeGate = new FinalGradeTableGateway($dbAdapter);
+        $finalGrade = new FinalGrade(array("StudentID" => $student->StudentID, "EvaluationID" => $student->EvaluationID, "FinalGrade" => $gradeSummary), false);
+        $oldFinalGrade = $finalGradeGate->findByStudentID($student->StudentID);
+
+        // If a final grade already exists
+        if (count($oldFinalGrade) > 0) {
+            $finalGradeGate->update($finalGrade);
+        }
+        else {
+            $finalGradeGate->insert($finalGrade);
         }
     }
     $_SESSION["user"]["graded"] = true;

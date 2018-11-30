@@ -8,48 +8,23 @@ session_start();
 $studentGate = new StudentTableGateway($dbAdapter);
 $gradeGate = new GradeTableGateway($dbAdapter);
 $criteriaGate = new GradeCriteriaTableGateway($dbAdapter);
+$finalGradeGate = new FinalGradeTableGateway($dbAdapter);
 
 $criterias = $criteriaGate->findAll();
-$students = $studentGate->findByGroupID($_SESSION["user"]["GroupID"]);
-$grades = $gradeGate->findBy("StudentID = ? and EvaluationID = ?", array($_SESSION["user"]["StudentID"], 
-                                                                         $_SESSION["user"]["EvaluationID"]));
 
-$gradeAvgTotal = 0;
-$gradeAvgMax = count($grades) * 10;
-$numOfGrades = count($grades);
-foreach ($grades as $grade) {
-    // Access the fieldValues array inside the grade object.
-    $fields = $grade->getFieldValues();
-    // Sum up all of the values in each row of the student's grades
-    $sumOfGrades = 0;
-    foreach ($criterias as $criteria) {
-        $sumOfGrades += $fields[$criteria->Title];
-    }
-    $rowAvg = $sumOfGrades / count($criterias);
-    $gradeAvgTotal += $rowAvg;
-}
-$gradeSummary = $gradeAvgTotal / $gradeAvgMax;
-$gradeSummary *= 100;
+// Get all of the currently logged in student's grades
+$grades = $gradeGate->findBy("StudentID = ? and EvaluationID = ?", array($_SESSION["user"]["StudentID"], $_SESSION["user"]["EvaluationID"]));
+
+$students = $studentGate->findByGroupID($_SESSION["user"]["GroupID"]);
+$finalGrade = $finalGradeGate->findByStudentID($_SESSION["user"]["StudentID"]);
 
 $letterGrade = "";
-if ($gradeSummary >= 100) { $letterGrade = "A+"; }
-else if ($gradeSummary >= 90 && $gradeSummary < 100) { if ($gradeSummary == 90) { $letterGrade = "A-"; } else { $letterGrade = "A"; } }
-else if ($gradeSummary >= 80 && $gradeSummary < 90) { if ($gradeSummary == 80) { $letterGrade = "B-"; } else if ($gradeSummary == 89) { $letterGrade = "B+"; } else { $letterGrade = "B"; } }
-else if ($gradeSummary >= 70 && $gradeSummary < 80) { if ($gradeSummary == 70) { $letterGrade = "C-"; } else if ($gradeSummary == 79) { $letterGrade = "C+"; } else { $letterGrade = "C"; } }
-else if ($gradeSummary >= 60 && $gradeSummary < 70) { if ($gradeSummary == 60) { $letterGrade = "D-"; } else if ($gradeSummary == 69) { $letterGrade = "D+"; } else { $letterGrade = "D"; } }
+if ($finalGrade->FinalGrade >= 100) { $letterGrade = "A+"; }
+else if ($finalGrade->FinalGrade >= 90 && $finalGrade->FinalGrade < 100) { if ($finalGrade->FinalGrade == 90) { $letterGrade = "A-"; } else { $letterGrade = "A"; } }
+else if ($finalGrade->FinalGrade >= 80 && $finalGrade->FinalGrade < 90) { if ($finalGrade->FinalGrade == 80) { $letterGrade = "B-"; } else if ($finalGrade->FinalGrade == 89) { $letterGrade = "B+"; } else { $letterGrade = "B"; } }
+else if ($finalGrade->FinalGrade >= 70 && $finalGrade->FinalGrade < 80) { if ($finalGrade->FinalGrade == 70) { $letterGrade = "C-"; } else if ($finalGrade->FinalGrade == 79) { $letterGrade = "C+"; } else { $letterGrade = "C"; } }
+else if ($finalGrade->FinalGrade >= 60 && $finalGrade->FinalGrade < 70) { if ($finalGrade->FinalGrade == 60) { $letterGrade = "D-"; } else if ($finalGrade->FinalGrade == 69) { $letterGrade = "D+"; } else { $letterGrade = "D"; } }
 else { $letterGrade = "F"; }
-
-$finalGradeGate = new FinalGradeTableGateway($dbAdapter);
-$finalGrade = new FinalGrade(array("StudentID" => $_SESSION["user"]["StudentID"],"EvaluationID" => $_SESSION["user"]["EvaluationID"], "FinalGrade" => $gradeSummary), false);
-$oldFinalGrade = $finalGradeGate->findByStudentID($_SESSION["user"]["StudentID"]);
-
-// If a final grade already exists
-if (count($oldFinalGrade) > 0) {
-    $finalGradeGate->update($finalGrade);
-}
-else {
-    $finalGradeGate->insert($finalGrade);
-}
 
 ?>
 
@@ -73,7 +48,7 @@ else {
             <?php if (count($grades) < count($students)) { ?>
                 <h3 class="mt-5">Your current grade: </h3>
                 <h1 class="mt-3 d-inline-block display-1 font-weight-bold"><?= $letterGrade ?></h1>
-                <h3 class="display-4">(<?= $gradeSummary . "%" ?>)</h3>
+                <h3 class="display-4">(<?= $finalGrade->FinalGrade . "%" ?>)</h3>
                 <p class="text-center">
                     <br/>
                     <strong>This is not your final grade.</strong>
@@ -85,7 +60,7 @@ else {
             <?php } else { ?>
                 <h3 class="mt-5">Your final grade: </h3>
                 <h1 class="mt-3 d-inline-block display-1 font-weight-bold"><?= $letterGrade ?></h1>
-                <h3 class="display-4">(<?= $gradeSummary . "%" ?>)</h3>
+                <h3 class="display-4">(<?= $finalGrade->FinalGrade . "%" ?>)</h3>
             <?php } ?>
             </div>
         </div>

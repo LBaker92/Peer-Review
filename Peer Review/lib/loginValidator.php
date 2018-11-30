@@ -12,15 +12,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["errors"]["email"] = "An email address is required.";
         $_SESSION["errors"]["password"] = "A password is required.";
         header("Location: ../login.php");
+        exit();
     }
     else if (empty($_POST["email"]) && !empty($_POST["password"])) {
         $_SESSION["errors"]["email"] = "An email address is required.";
         header("Location: ../login.php");
+        exit();
     }
     else if (!empty($_POST["email"]) && empty($_POST["password"])) {
         $_SESSION["email"] = $_POST["email"];
         $_SESSION["errors"]["password"] = "A password is required.";
         header("Location: ../login.php");
+        exit();
     }
 
     // Check if the email address is an instructor or student
