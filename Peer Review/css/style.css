@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.login-box {
+    position: absolute;
+    margin: auto auto;
+    padding: 5rem 2rem;
+    max-width: 500px;
+    height: 500px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.form-alert {
+    color: red;
+    font-weight: bold;
+    margin: 0;
+}
+
+.navbar-toggler {
+    padding: .3rem;
+}
+
+.form-control {
+    transition: .15s all ease-in-out;
+}
+
+.form-control:focus {
+    border-color: rgba(128, 128, 128, 0.75);
+    box-shadow: 0 0 0 0;
+}
+
+.custom-select {
+    border: 0;
+    width: auto;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-style: italic;
+    color: rgba(128, 128, 128, 0.75) !important;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-style: italic;
+    color: rgba(128, 128, 128, 0.75) !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    font-style: italic;
+    color: rgba(128, 128, 128, 0.75) !important;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.fa-crown {
+    color: rgb(243, 207, 0);
+}
+
+#reeval a {
+    color: white;
+    text-decoration: none;
+}
+
+#reeval a:hover {
+    color: grey;
+    transition: all ease .25s;
+}
