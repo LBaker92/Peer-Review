@@ -14,24 +14,26 @@ $students = $studentGate->findByGroupID($group->GroupID);
 $criterias = $criteriaGate->findAll();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $error = false;
+    $gradeValues = array();
     foreach($_POST as $grades) {
-        if ($error) {
-            break;
-        }
         // Loop through the single values stored in each person's evaluation
         foreach($grades as $grade) {
-            if (empty($grade)) {
-                $_SESSION["errors"]["input"] = "You left a field empty.";
-                header("Location: ../student/evaluation.php");
-                exit();
+            if (empty($grade || $grade < 0 || $grade > 10)) {
+                $_SESSION["errors"]["input"] = "Make sure to fill all fields with values between 0 - 10";
             }
             if ($grade < 0 || $grade > 10) {
-                $_SESSION["errors"]["input"] = "Grade values must be between 0-10";
-                header("Location: ../student/evaluation.php");
-                exit();
+                array_push($gradeValues, "");
+            }
+            else {
+                array_push($gradeValues, $grade);
             }
         }
+    }
+
+    $_SESSION["grades"] = $gradeValues;
+    if (!empty($_SESSION["errors"]["input"])) {
+        header("Location: ../student/evaluation.php");
+        exit();
     }
     
     // Insert each student's grade into the Grade table
@@ -78,32 +80,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $gradeAvgMax = count($grades) * 10;
         $numOfGrades = count($grades);
         foreach ($grades as $grade) {
-        // Access the fieldValues array inside the grade object.
-        $fields = $grade->getFieldValues();
-        // Sum up all of the values in each row of the student's grades
-        $sumOfGrades = 0;
-        foreach ($criterias as $criteria) {
-        $sumOfGrades += $fields[$criteria->Title];
+            // Access the fieldValues array inside the grade object.
+            $fields = $grade->getFieldValues();
+            // Sum up all of the values in each row of the student's grades
+            $sumOfGrades = 0;
+            foreach ($criterias as $criteria) {
+                $sumOfGrades += $fields[$criteria->Title];
+            }
+            $rowAvg = $sumOfGrades / count($criterias);
+            $gradeAvgTotal += $rowAvg;
         }
-        $rowAvg = $sumOfGrades / count($criterias);
-        $gradeAvgTotal += $rowAvg;
-        }
+
         $gradeSummary = $gradeAvgTotal / $gradeAvgMax;
         $gradeSummary *= 100;
 
         $finalGradeGate = new FinalGradeTableGateway($dbAdapter);
-        $finalGrade = new FinalGrade(array("StudentID" => $student->StudentID, "EvaluationID" => $student->EvaluationID, "FinalGrade" => $gradeSummary), false);
+        $finalGrade = new FinalGrade(array("StudentID" => $student->StudentID,
+                                           "Email" => $student->Email,
+                                           "EvaluationID" => $student->EvaluationID,
+                                           "FinalGrade" => $gradeSummary), false);
+        
         $oldFinalGrade = $finalGradeGate->findByStudentID($student->StudentID);
 
         // If a final grade already exists
-        if (count($oldFinalGrade) > 0) {
+        if (!empty($oldFinalGrade) > 0) {
             $finalGradeGate->update($finalGrade);
         }
         else {
             $finalGradeGate->insert($finalGrade);
         }
     }
-    $_SESSION["user"]["graded"] = true;
+
+    $studentGate->setCompletedEval($_SESSION["user"]["StudentID"], 1);
     header("Location: ../student/grade.php");
 }
 

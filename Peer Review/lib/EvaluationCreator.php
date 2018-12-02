@@ -14,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "Section" => $_POST["section"],
         "Semester" => $_POST["semester"],
         "Year" => $_POST["year"],
-        "InstructorID" => $_SESSION["user"]["InstructorID"]
+        "InstructorID" => $_SESSION["user"]["InstructorID"],
+        "PublishEval" => false
     );
     
     $eval = new Evaluation($eval, false);
@@ -63,7 +64,8 @@ function parseCSV($fileLoc, $eval)
                 "LastName" => $row[0],
                 "Email" => convertToEmail($row[2]),
                 "Password" => generatePassword($row),
-                "EvaluationID" => $eval->EvaluationID
+                "EvaluationID" => $eval->EvaluationID,
+                "CompletedEval" => false
             );
             array_push($students, $student);
         }

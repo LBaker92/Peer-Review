@@ -1,6 +1,11 @@
 <?php
+include 'includes/config.inc.php';
 session_start();
-$_SESSION["user"]["graded"] = false; // if the student completed a group evaluation
 
-header("Location: student/evaluation.php");
+$studentGate = new StudentTableGateway($dbAdapter);
+$studentGate->setCompletedEval($_SESSION["user"]["StudentID"], false);
+
+$_SESSION["user"] = $studentGate->findById($_SESSION["user"]["StudentID"])->getFieldValues();
+
+header("Location: student/index.php");
 ?>

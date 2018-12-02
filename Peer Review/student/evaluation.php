@@ -16,7 +16,6 @@ $group = $groupGate->findById($_SESSION["user"]["GroupID"]);
 $students = $studentGate->findByGroupID($group->GroupID);
 $criterias = $criteriaGate->findAll();
 $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
-
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +42,7 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                     <?php if (!empty($_SESSION["errors"]["input"])) { ?>
                     <p class="form-alert mb-2">* <?= $_SESSION["errors"]["input"] ?></p>
                     <?php } ?>
+                    <?php $gradeValueIndex = 0 ?>
                     <?php foreach($students as $student) { ?>
                         <table class="table table-bordered">
                             <thead>
@@ -74,20 +74,29 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                                 <?php foreach($criterias as $criteria) { ?>
                                 <?php   if (!empty($_SESSION["errors"]["input"])) { ?>
                                     <td>
-                                    <input class="form-control is-invalid" type="number" 
+                                    <?php if (!empty($_SESSION["grades"][$gradeValueIndex])) { ?>
+                                    <input class="form-control is-valid" type="number" 
                                             name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
-                                            min="0" max="10" placeholder="Value between 0-10">
+                                            min="0" max="10" value="<?= $_SESSION["grades"][$gradeValueIndex] ?>">
                                     </td>
+                                    <?php } else { ?>
+                                        <input class="form-control is-invalid" type="number" 
+                                            name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
+                                            min="0" max="10">
+                                    </td>
+                                    <?php } ?>
+                                    <?php $gradeValueIndex++; ?>
                                   <?php } else { ?>
                                     <td><input class="form-control" 
                                                 type="number" name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
-                                                min="0" max="10" pplaceholder="Value between 0-10"></td>
+                                                min="0" max="10"></td>
                                     <?php } ?>
                                 <?php } ?>
                                 </tr>
                             </tbody>
                         </table>
                     <?php } ?>
+                    <?php unset($_SESSION["grades"]); ?>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-lg btn-block btn-dark mt-4">Submit</button>
                     </div>

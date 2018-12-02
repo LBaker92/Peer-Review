@@ -29,12 +29,24 @@ class EvaluationTableGateway extends TableDataGateway
 
     public function findByEval($eval)
     {
-        $test = $this->findBy("CourseID = ? and Section = ? and Year = ?", array(
+        $sql = $this->findBy("CourseID = ? and Section = ? and Year = ?", array(
             $eval->CourseID,
             $eval->Section,
             $eval->Year
         ))[0];
-        return $test;
+        return $sql;
+    }
+
+    public function findByEvalID($id)
+    {
+        $sql = $this->getSelectStatement() . " WHERE EvaluationID = ?";
+        return $this->convertRowToObject($this->dbAdapter->fetchRow($sql, $id));
+    }
+
+    public function findEvalsByInstructorID($id)
+    {
+        $sql = $this->getSelectStatement() . " WHERE InstructorID = ?";
+        return $this->convertRecordsToObjects($this->dbAdapter->fetchAsArray($sql, $id));
     }
 
     public function insert($eval)
@@ -43,6 +55,12 @@ class EvaluationTableGateway extends TableDataGateway
         if (!$success) {
             throw new PDOException;
         }
+    }
+
+    public function setPublishEval($evalID, $status) 
+    {
+        $sql = "UPDATE " . $this->getTableName() . " SET PublishEval = ? WHERE EvaluationID = ?";
+        $this->dbAdapter->runQuery($sql, Array($status, $evalID));
     }
 }
 

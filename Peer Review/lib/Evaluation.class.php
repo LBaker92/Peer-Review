@@ -4,7 +4,7 @@ class Evaluation extends DomainObject
 {
     static function getFieldNames()
     {
-        return array("EvaluationID", "CourseID", "CourseTitle", "Section", "Semester", "Year", "InstructorID");
+        return array("EvaluationID", "CourseID", "CourseTitle", "Section", "Semester", "Year", "InstructorID", "PublishEval");
     }
 
     public function __construct(array $data, $generateException)

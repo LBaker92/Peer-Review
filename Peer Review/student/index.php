@@ -11,8 +11,14 @@ if (!empty($_SESSION["user"])) {
     }
     // If user is already in a group
     if (!empty($_SESSION["user"]["GroupID"])) {
-        header("Location: evaluation.php");
-        exit();
+        if ($_SESSION["user"]["CompletedEval"]) {
+            header("Location: grade.php");
+            exit();
+        }
+        else {
+            header("Location: evaluation.php");
+            exit();
+        }
     }
 }
 else {

@@ -9,6 +9,10 @@ if (!empty($_SESSION['user'])) {
         exit();
     }
 }
+
+$evalGate = new EvaluationTableGateway($dbAdapter);
+$eval = $evalGate->findEvalsByInstructorID($_SESSION["user"]["InstructorID"])[0];
+
 ?>
 
 <!DOCTYPE html>
@@ -23,15 +27,16 @@ if (!empty($_SESSION['user'])) {
 </head>
 <body>
     <?php insertNavbar(); ?>
-    <pre>
-    <?php // print_r($_SESSION["user"]); ?>
-    </pre>
     <div class="container">
         <div class="row py-5"></div>
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <p>SUCCESS!</p>
+            <div class="col-md-8 text-center">
+            <?php if ($eval->PublishEval) { ?>
+                <button class="btn btn-dark btn-lg" id="reeval"><a href="../unpublish.php">Hide Evaluation</a></button>
+            <?php } else { ?>
+                <button class="btn btn-dark btn-lg" id="reeval"><a href="../publish.php">Publish Evaluation</a></button>
+            <?php } ?>
             </div>
             <div class="col-md-2"></div>
         </div>

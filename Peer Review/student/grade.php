@@ -1,9 +1,14 @@
 <?php
-
-// FINAL GRADES SHOULD BE GETTING SENT SOMEWHERE TO GIVE TO THE TEACHER
-
 include "../includes/helpers.inc.php";
 session_start();
+
+$evalGate = new EvaluationTableGateway($dbAdapter);
+$eval = $evalGate->findByEvalID($_SESSION["user"]["EvaluationID"]);
+
+// If the evaluation has not been published give the student an error message
+if (!$eval->PublishEval) {
+    $_GET["error"] = "not published";
+}
 
 $studentGate = new StudentTableGateway($dbAdapter);
 $gradeGate = new GradeTableGateway($dbAdapter);
@@ -45,22 +50,26 @@ else { $letterGrade = "F"; }
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12 text-center mt-5">
-            <?php if (count($grades) < count($students)) { ?>
-                <h3 class="mt-5">Your current grade: </h3>
-                <h1 class="mt-3 d-inline-block display-1 font-weight-bold"><?= $letterGrade ?></h1>
-                <h3 class="display-4">(<?= $finalGrade->FinalGrade . "%" ?>)</h3>
-                <p class="text-center">
-                    <br/>
-                    <strong>This is not your final grade.</strong>
-                    <br/>
-                    <strong><?= count($grades) ?>/<?= count($students) ?></strong> of your group members have finished their evaluations.
-                    <br/>
-                    Your final grade will be determined when all group members have finished their evaluations.
-                </p>
+            <?php if (empty($_GET["error"])) { ?>
+                <?php if (count($grades) < count($students)) { ?>
+                    <h3 class="mt-5">Your current grade: </h3>
+                    <h1 class="mt-3 d-inline-block display-1 font-weight-bold"><?= $letterGrade ?></h1>
+                    <h3 class="display-4">(<?= $finalGrade->FinalGrade . "%" ?>)</h3>
+                    <p class="text-center">
+                        <br/>
+                        <strong>This is not your final grade.</strong>
+                        <br/>
+                        <strong><?= count($grades) ?>/<?= count($students) ?></strong> of your group members have finished their evaluations.
+                        <br/>
+                        Your final grade will be determined when all group members have finished their evaluations.
+                    </p>
+                <?php } else { ?>
+                    <h3 class="mt-5">Your final grade: </h3>
+                    <h1 class="mt-3 d-inline-block display-1 font-weight-bold"><?= $letterGrade ?></h1>
+                    <h3 class="display-4">(<?= $finalGrade->FinalGrade . "%" ?>)</h3>
+                <?php } ?>
             <?php } else { ?>
-                <h3 class="mt-5">Your final grade: </h3>
-                <h1 class="mt-3 d-inline-block display-1 font-weight-bold"><?= $letterGrade ?></h1>
-                <h3 class="display-4">(<?= $finalGrade->FinalGrade . "%" ?>)</h3>
+                    <h3>The professor has not published the evaulations yet.</h3>
             <?php } ?>
             </div>
         </div>

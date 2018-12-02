@@ -4,7 +4,7 @@ class FinalGrade extends DomainObject
 {
     static function getFieldNames()
     {
-        return array("StudentID", "EvaluationID", "FinalGrade");
+        return array("StudentID", "Email", "EvaluationID", "FinalGrade");
     }
 
     public function __construct(array $data, $generateException)

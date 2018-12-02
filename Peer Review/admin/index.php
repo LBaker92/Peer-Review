@@ -8,6 +8,17 @@ if (!empty($_SESSION['user'])) {
         exit();
     }
 }
+
+$evalGate = new EvaluationTableGateway($dbAdapter);
+$evals = $evalGate->findEvalsByInstructorID($_SESSION["user"]["InstructorID"]);
+
+// This wont work for more than 1 evaluation.
+// Later, we can add a selection to choose which course to publish
+if (count($evals) > 0) {
+    header("Location: manager.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
