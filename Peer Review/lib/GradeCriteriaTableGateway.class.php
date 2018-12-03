@@ -9,7 +9,7 @@ class GradeCriteriaTableGateway extends TableDataGateway
 
     protected function getTableName()
     {
-        return "GradeCriteria";
+        return "gradecriteria";
     }
 
     protected function getDomainObjectClassName()

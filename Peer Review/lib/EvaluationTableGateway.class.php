@@ -9,7 +9,7 @@ class EvaluationTableGateway extends TableDataGateway
 
     protected function getTableName()
     {
-        return "Evaluations";
+        return "evaluations";
     }
 
     protected function getDomainObjectClassName()

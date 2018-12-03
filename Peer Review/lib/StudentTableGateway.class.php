@@ -9,7 +9,7 @@ class StudentTableGateway extends TableDataGateway
 
     protected function getTableName()
     {
-        return "Students";
+        return "students";
     }
 
     protected function getDomainObjectClassName()

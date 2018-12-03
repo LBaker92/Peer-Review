@@ -9,7 +9,7 @@ class GradeTableGateway extends TableDataGateway
 
     protected function getTableName()
     {
-        return "Grades";
+        return "grades";
     }
 
     protected function getDomainObjectClassName()

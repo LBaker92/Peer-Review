@@ -9,7 +9,7 @@ class InstructorTableGateway extends TableDataGateway
 
     protected function getTableName()
     {
-        return "Instructors";
+        return "instructors";
     }
 
     protected function getDomainObjectClassName()

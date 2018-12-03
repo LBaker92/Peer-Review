@@ -9,7 +9,7 @@ class GroupTableGateway extends TableDataGateway
 
     protected function getTableName()
     {
-        return "Groups";
+        return "groups";
     }
 
     protected function getDomainObjectClassName()
