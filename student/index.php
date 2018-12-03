@@ -89,11 +89,19 @@ else {
                         <?php insertGrouplessStudents(); ?>
                         <div class="form-alert">* <?= $_SESSION["errors"]["memberIDs"] ?></div>
                     </div>
-                    <?php } else { ?>
+                    <?php } else if (!empty($_SESSION["errors"]["included"])) { ?>
                     <div class="form-group">
                         <label><strong>Group Members</strong></label>
-                        <small class="d-block"><strong>* Hold ctrl / cmd and click to select more than one member.</strong></small>
-                        <small class="d-block"><strong>* Do not exceed 5 group members.</strong></small>
+                        <small class="d-block">* Hold ctrl / cmd and click to select more than one member.</small>
+                        <small class="d-block">* Do not exceed 5 group members.</small>
+                        <?php insertGrouplessStudents(); ?>
+                        <div class="form-alert">* <?= $_SESSION["errors"]["included"] ?></div>
+                    </div>
+                    <?php } else { ?>
+                        <div class="form-group">
+                        <label><strong>Group Members</strong></label>
+                        <small class="d-block">* Hold ctrl / cmd and click to select more than one member.</small>
+                        <small class="d-block">* Do not exceed 5 group members.</small>
                         <?php insertGrouplessStudents(); ?>
                     </div>
                     <?php } ?>

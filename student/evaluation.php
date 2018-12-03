@@ -7,6 +7,11 @@ if (!empty($_SESSION["user"]["graded"])) {
     exit();
 }
 
+if (!$_SESSION["user"]["GroupID"]) {
+    header("Location: index.php");
+    exit();
+}
+
 $groupGate = new GroupTableGateway($dbAdapter);
 $studentGate = new StudentTableGateway($dbAdapter);
 $criteriaGate = new GradeCriteriaTableGateway($dbAdapter);

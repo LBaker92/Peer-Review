@@ -56,9 +56,8 @@ class StudentTableGateway extends TableDataGateway
         $fieldsToUpdate = array("EvaluationID" => $student->EvaluationID,
                                 "GroupID" => null);
         $this->dbAdapter->update($this->getTableName(), $fieldsToUpdate,
-                                 "StudentID = :studentID and GroupID = :groupID",
-                                 array(":studentID" => $student->StudentID,
-                                       ":groupID" => $student->GroupID));
+                                 "StudentID = :studentID",
+                                 array(":studentID" => $student->StudentID));
     }
 }
 
