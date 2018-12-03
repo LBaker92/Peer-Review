@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2018 at 04:43 PM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Dec 03, 2018 at 01:48 AM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -35,7 +35,8 @@ CREATE TABLE `evaluations` (
   `Section` int(11) NOT NULL,
   `Semester` varchar(7) NOT NULL,
   `Year` int(11) NOT NULL,
-  `InstructorID` int(11) NOT NULL
+  `InstructorID` int(11) NOT NULL,
+  `PublishEval` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -47,6 +48,7 @@ CREATE TABLE `evaluations` (
 CREATE TABLE `finalgrades` (
   `StudentID` int(11) NOT NULL,
   `EvaluationID` int(11) NOT NULL,
+  `Email` varchar(255) NOT NULL,
   `FinalGrade` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -137,7 +139,8 @@ CREATE TABLE `students` (
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
   `GroupID` int(10) DEFAULT NULL,
-  `EvaluationID` int(11) DEFAULT NULL
+  `EvaluationID` int(11) DEFAULT NULL,
+  `CompletedEval` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -192,7 +195,6 @@ ALTER TABLE `instructors`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`StudentID`),
-  ADD UNIQUE KEY `email` (`Email`),
   ADD KEY `fk_groupID` (`GroupID`),
   ADD KEY `fk_evaluationID` (`EvaluationID`);
 
