@@ -23,7 +23,13 @@ if (!empty($_SESSION['user'])) {
 <body>
     <?php insertAdminNavbar(); ?>
     <div class="container">
-        <div class="row mt-3"></div>
+        <div class="row mt-3">
+        <?php if (!empty($_GET["error"])) { ?>
+            <div class="alert alert-danger mx-auto" role="alert">
+                <strong>Oh snap!</strong> <?= $_GET["error"] ?>
+            </div>
+        <?php } ?>
+        </div>
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">

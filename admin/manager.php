@@ -13,6 +13,11 @@ if (!empty($_SESSION['user'])) {
 $evalGate = new EvaluationTableGateway($dbAdapter);
 $eval = $evalGate->findEvalsByInstructorID($_SESSION["user"]["InstructorID"])[0];
 
+if (!$eval) {
+    header("Location: creator.php?error=" . urlencode("There were no evaluations found in the database."));
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
