@@ -26,7 +26,7 @@ $eval = $evalGate->findEvalsByInstructorID($_SESSION["user"]["InstructorID"])[0]
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <?php insertNavbar(); ?>
+<?php insertAdminNavbar(); ?>
     <div class="container">
         <div class="row py-5"></div>
         <div class="row">

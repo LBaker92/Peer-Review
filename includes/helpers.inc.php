@@ -12,6 +12,34 @@ include 'config.inc.php';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <?php } ?>
 
+<?php function insertAdminNavbar() { ?>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Peer Review</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav_content" aria-controls="nav_content" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="nav_content">
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="creator.php">Create Evaluation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="manager.php">Evaluation Manager</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../logout.php">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+<?php } ?>
+
 <?php function insertNavbar() { ?>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
