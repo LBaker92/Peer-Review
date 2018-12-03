@@ -1,9 +1,6 @@
 <?php
 session_start();
 include "../includes/config.inc.php";
-foreach(glob("PHPMailer/src/") as $fileName) {
-    include $fileName;
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -27,9 +24,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $students = parseCSV($rosterLoc, $eval);
         $studentGate = new StudentTableGateway($dbAdapter);
         // Loop through the students array, convert them to Student objects and insert into the DB
+        $studentsFromDb = $studentGate->findAll();
         foreach($students as $student) {
             $student = new Student($student, false);
-            $studentGate->insert($student);
+            $alreadyUpdated = false;
+            foreach($studentsFromDb as $s) {
+                if ($student->Email == $s->Email) {
+                    $s->EvaluationID = $student->EvaluationID;
+                    $s->GroupID = null;
+                    $studentGate->updateEvalID($s);
+                    $alreadyUpdated = true;
+                    break;
+                }
+            }
+            if (!$alreadyUpdated) {
+                $studentGate->insert($student);
+            }
         }
     }
     header("Location: ../admin/manager.php");

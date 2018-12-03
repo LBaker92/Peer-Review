@@ -42,6 +42,17 @@ unset($_SESSION["errors"]["memberIDs"]);
                 $_SESSION["errors"]["memberIDs"] = "You selected more than 5 group members.";
             }
 
+            $leaderSelected = false;
+            foreach($_POST["memberIDs"] as $memberID) {
+                if ($_SESSION["user"]["StudentID"] == $memberID) {
+                    $leaderSelected = true;
+                    break;
+                }
+            }
+            if (!$leaderSelected) {
+                $_SESSION["errors"]["included"] = "The leader of the group must be included.";
+            }
+
             if ($_SESSION["user"]["Email"] != $_POST["leader"]) {
                 $_SESSION["errors"]["leader"] = "You must be the group's leader to create the group.";
             }
