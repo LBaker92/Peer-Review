@@ -96,9 +96,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $finalGradeGate = new FinalGradeTableGateway($dbAdapter);
         $finalGrade = new FinalGrade(array("StudentID" => $student->StudentID,
-                                           "Email" => $student->Email,
                                            "EvaluationID" => $student->EvaluationID,
-                                           "FinalGrade" => $gradeSummary), false);
+                                           "FirstName" => $student->FirstName,
+                                           "LastName" => $student->LastName,
+                                           "Username" => substr($student->Email, 0, strpos($student->Email, '@')),
+                                           "FinalGrade" => $gradeSummary
+                                        ), false);
         
         $oldFinalGrade = $finalGradeGate->findByStudentID($student->StudentID);
 
