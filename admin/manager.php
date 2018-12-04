@@ -10,6 +10,10 @@ if (!empty($_SESSION['user'])) {
         }
     }
 }
+else {
+    header("Location: ../login.php");
+    exit();
+}
 $_SESSION["user"] = getUserInfo("Instructor", $_SESSION["user"]["Email"]);
 $_SESSION["user"]["admin"] = true;
 
