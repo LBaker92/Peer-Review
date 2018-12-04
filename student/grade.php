@@ -80,7 +80,7 @@ else { $letterGrade = "F"; }
                 <br/>
                 <small>(Definitely not trying to get back at your group for giving you a bad grade?)</small>
             </p>
-            <button class="btn btn-dark btn-lg" id="reeval"><a href="../reevaluate.php">Resubmit Evaluation</a></button>
+            <a href="../reevaluate.php">Resubmit Evaluation</a>
         </div>
     </div>
     </div>
