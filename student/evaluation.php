@@ -88,24 +88,37 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                                 </tr>
                                 <tr>
                                 <?php foreach($criterias as $criteria) { ?>
-                                <?php   if (!empty($_SESSION["errors"]["input"])) { ?>
+                                <?php if (!empty($_SESSION["errors"]["input"])) { ?>
                                     <td>
                                     <?php if (!empty($_SESSION["grades"][$gradeValueIndex])) { ?>
-                                    <input class="form-control is-valid" type="number" 
+                                        <input class="form-control is-valid" type="number" 
                                             name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
                                             min="0" max="10" value="<?= $_SESSION["grades"][$gradeValueIndex] ?>">
                                     </td>
                                     <?php } else { ?>
+                                    <td>
                                         <input class="form-control is-invalid" type="number" 
                                             name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
                                             min="0" max="10">
                                     </td>
                                     <?php } ?>
                                     <?php $gradeValueIndex++; ?>
-                                  <?php } else { ?>
+                                    <?php } else if (count($graded) > 0) { ?>
+                                    <?php foreach($graded as $grade) { ?>
+                                    <?php if ($grade->StudentID == $_SESSION["user"]["StudentID"]) { ?>
+                                    <?php $title = (string)$criteria->Title; ?>
+                                    <td>
+                                        <input class="form-control" type="number" 
+                                            name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
+                                            min="0" max="10" value="<?= $grade->$title ?>">
+                                    </td>
+                                           <?php } ?>
+                                      <?php  } ?>
+                                    <?php } else { ?>
                                     <td><input class="form-control" 
                                                 type="number" name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
-                                                min="0" max="10"></td>
+                                                min="0" max="10">
+                                    </td>
                                     <?php } ?>
                                 <?php } ?>
                                 </tr>

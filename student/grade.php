@@ -84,15 +84,17 @@ else { $letterGrade = "F"; }
             <?php } ?>
             </div>
         </div>
-    <div class="row">
-        <div class="col-md-12 text-center mt-3">
-            <p class="mt-5">
-                Did you make a mistake while grading? 
-                <br/>
-            </p>
-            <a href="../reevaluate.php">Resubmit Evaluation</a>
+    <?php if (!$eval->PublishEval) { ?>
+        <div class="row">
+            <div class="col-md-12 text-center mt-3">
+                <p class="mt-5">
+                    Did you make a mistake while grading? 
+                    <br/>
+                </p>
+                <a href="../reevaluate.php">Resubmit Evaluation</a>
+            </div>
         </div>
-    </div>
+    <?php } ?>
     </div>
 </body>
 </html>
