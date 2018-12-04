@@ -1,6 +1,17 @@
 <?php
-include "../includes/helpers.inc.php";
+include '../includes/helpers.inc.php';
 session_start();
+
+if (!empty($_SESSION['user'])) {
+    if (!empty($_SESSION['user']['admin'])) {
+        if ($_SESSION['user']['admin']) {
+            header('Location: ../admin/index.php');
+            exit();
+        }
+    }
+}
+$_SESSION["user"] = getUserInfo("Student", $_SESSION["user"]["Email"]);
+$_SESSION["user"]["admin"] = false;
 
 $evalGate = new EvaluationTableGateway($dbAdapter);
 $eval = $evalGate->findByEvalID($_SESSION["user"]["EvaluationID"]);

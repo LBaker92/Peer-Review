@@ -1,14 +1,18 @@
 <?php
-include "../includes/helpers.inc.php";
+include '../includes/helpers.inc.php';
 session_start();
 
-// If the user is logged in
-if (!empty($_SESSION["user"])) {
-    if ($_SESSION["user"]["admin"]) {
-        // Redirect an admin back to the admin page
-        header("Location: ../admin/index.php");
-        exit();
+if (!empty($_SESSION['user'])) {
+    if (!empty($_SESSION['user']['admin'])) {
+        if ($_SESSION['user']['admin']) {
+            header('Location: ../admin/index.php');
+            exit();
+        }
     }
+}
+$_SESSION["user"] = getUserInfo("Student", $_SESSION["user"]["Email"]);
+$_SESSION["user"]["admin"] = false;
+
     // If user is already in a group
     if (!empty($_SESSION["user"]["GroupID"])) {
         if ($_SESSION["user"]["CompletedEval"]) {
@@ -20,11 +24,6 @@ if (!empty($_SESSION["user"])) {
             exit();
         }
     }
-}
-else {
-    header("Location: ../login.php");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>

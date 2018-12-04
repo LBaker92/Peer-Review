@@ -96,7 +96,13 @@ function getUserInfo($type, $email)
     if (class_exists($class)) {
         $dbAdapter = DatabaseAdapterFactory::create('PDO', array(DBCONNECTION, DBUSER, DBPASS));
         $gate = new $class($dbAdapter);
-        return $gate->findByEmail($email)->getFieldValues();
+        $user = $gate->findByEmail($email);
+        if ($user) {
+            return $user->getFieldValues();
+        }
+        else {
+            return null;
+        }
     }
 }
 
