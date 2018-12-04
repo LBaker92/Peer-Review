@@ -32,13 +32,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($student->Email == $s->Email) {
                     $s->EvaluationID = $student->EvaluationID;
                     $s->GroupID = null;
-                    $studentGate->updateEvalID($s);
+                    $studentGate->updateEvalAndGroupID($s);
                     $alreadyUpdated = true;
                     break;
                 }
             }
             if (!$alreadyUpdated) {
                 $studentGate->insert($student);
+                // PUT EMAIL FUNCTION HERE
             }
         }
     }

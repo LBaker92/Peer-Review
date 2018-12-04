@@ -78,7 +78,6 @@ else { $letterGrade = "F"; }
             <p class="mt-5">
                 Did you make a mistake while grading? 
                 <br/>
-                <small>(Definitely not trying to get back at your group for giving you a bad grade?)</small>
             </p>
             <a href="../reevaluate.php">Resubmit Evaluation</a>
         </div>
