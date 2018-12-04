@@ -11,9 +11,20 @@ if (!empty($_SESSION['user'])) {
 }
 
 $evalGate = new EvaluationTableGateway($dbAdapter);
-$eval = $evalGate->findEvalsByInstructorID($_SESSION["user"]["InstructorID"]);
+$evals = $evalGate->findEvalsByInstructorID($_SESSION["user"]["InstructorID"]);
 
-if (empty($eval)) {
+$unpublishedEvals = 0;
+$publishedEvals = 0;
+foreach($evals as $eval) {
+    if (!$eval->PublishEval) {
+        $unpublishedEvals++;
+    }
+    else {
+        $publishedEvals++;
+    }
+}
+
+if (empty($evals)) {
     header("Location: creator.php?error=" . urlencode("There were no evaluations found in the database."));
     exit();
 }
@@ -37,11 +48,46 @@ if (empty($eval)) {
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8 text-center">
-                <select class="custom-select">
-                <?php foreach($evals as $eval) { ?>
-                    <option value="<?= $eval->EvaluationID ?>"><?= $eval->CourseID . " | " . $eval->CourseTitle ?></option>
-                <?php  } ?>
-                </select>
+                <?php if ($unpublishedEvals > 0) { ?>
+                <h3 class="mb-3">Publish Course</h3>
+                <form action="../publish.php" method="post">
+                    <div class="form-group">
+                        <select class="form-control" name="evalID" size="1">
+                        <?php foreach($evals as $eval) { ?>
+                            <?php if (!$eval->PublishEval) { ?>
+                            <option value="<?= $eval->EvaluationID ?>"><?= $eval->CourseID . " | " . $eval->CourseTitle ?></option>
+                            <?php  } ?>
+                        <?php  } ?>
+                        </select>
+                    </div>
+                    <button class="btn btn-lg btn-dark" type="submit">Publish</button>
+                </form>
+                <?php } else { ?>
+                <h4>All evaluations have been published.</h4>
+                <?php } ?>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 text-center">
+                <?php if ($publishedEvals > 0) { ?>
+                <h3 class="mb-3">Unpublish Course</h3>
+                <form action="../unpublish.php" method="post">
+                    <div class="form-group">
+                        <select class="form-control" name="evalID" size="1">
+                        <?php foreach($evals as $eval) { ?>
+                            <?php if ($eval->PublishEval) { ?>
+                            <option value="<?= $eval->EvaluationID ?>"><?= $eval->CourseID . " | " . $eval->CourseTitle ?></option>
+                            <?php  } ?>
+                        <?php  } ?>
+                        </select>
+                    </div>
+                    <button class="btn btn-lg btn-dark" type="submit">Unpublish</button>
+                </form>
+                <?php } else { ?>
+                <h4>There are no evaluations to unpublish.</h4>
+                <?php } ?>
             </div>
             <div class="col-md-2"></div>
         </div>

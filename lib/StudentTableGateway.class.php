@@ -54,7 +54,8 @@ class StudentTableGateway extends TableDataGateway
     public function updateEvalID($student)
     {
         $fieldsToUpdate = array("EvaluationID" => $student->EvaluationID,
-                                "GroupID" => null);
+                                "GroupID" => null,
+                                "CompletedEval" => false);
         $this->dbAdapter->update($this->getTableName(), $fieldsToUpdate,
                                  "StudentID = :studentID",
                                  array(":studentID" => $student->StudentID));

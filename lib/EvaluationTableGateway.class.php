@@ -49,14 +49,6 @@ class EvaluationTableGateway extends TableDataGateway
         return $this->convertRecordsToObjects($this->dbAdapter->fetchAsArray($sql, $id));
     }
 
-    public function insert($eval)
-    {
-        $success = $this->dbAdapter->insert($this->getTableName(), $eval->getFieldValues());
-        if (!$success) {
-            throw new PDOException;
-        }
-    }
-
     public function setPublishEval($evalID, $status) 
     {
         $sql = "UPDATE " . $this->getTableName() . " SET PublishEval = ? WHERE EvaluationID = ?";

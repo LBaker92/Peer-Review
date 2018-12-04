@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($student->Email == $s->Email) {
                     $s->EvaluationID = $student->EvaluationID;
                     $s->GroupID = null;
-                    $studentGate->updateEvalAndGroupID($s);
+                    $studentGate->updateEvalID($s);
                     $alreadyUpdated = true;
                     break;
                 }

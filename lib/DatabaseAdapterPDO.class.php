@@ -179,7 +179,7 @@ class DatabaseAdapterPDO implements DatabaseAdapterInterface
          */
 
         $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)", $escapedTableName, implode(', ', $fields), implode(', ', $values));
-
+        
         /*
 
         Sends the values of the parameter array to the query runner, which binds the values to each '?' placeholder.
