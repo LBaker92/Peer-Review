@@ -3,9 +3,19 @@ include '../includes/helpers.inc.php';
 session_start();
 
 if (!empty($_SESSION['user'])) {
-    if (!empty($_SESSION['user']['admin'])) {
-        if ($_SESSION['user']['admin']) {
-            header('Location: ../admin/index.php');
+    if ($_SESSION['user']['admin']) {
+        header('Location: ../admin/index.php');
+        exit();
+    }
+    else {
+        $userInDB = getUserInfo("Student", $_SESSION["user"]["Email"]);
+        if (!empty($userInDB)) {
+            $_SESSION["user"] = $userInDB;
+            $_SESSION["user"]["admin"] = false;
+        }
+        else {
+            session_destroy();
+            header("Location: login.php");
             exit();
         }
     }
@@ -14,8 +24,6 @@ else {
     header("Location: ../login.php");
     exit();
 }
-$_SESSION["user"] = getUserInfo("Student", $_SESSION["user"]["Email"]);
-$_SESSION["user"]["admin"] = false;
 
 if (!empty($_SESSION["user"]["graded"])) {
     header("Location: grade.php");
