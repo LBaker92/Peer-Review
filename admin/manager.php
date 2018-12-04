@@ -11,9 +11,9 @@ if (!empty($_SESSION['user'])) {
 }
 
 $evalGate = new EvaluationTableGateway($dbAdapter);
-$eval = $evalGate->findEvalsByInstructorID($_SESSION["user"]["InstructorID"])[0];
+$eval = $evalGate->findEvalsByInstructorID($_SESSION["user"]["InstructorID"]);
 
-if (!$eval) {
+if (empty($eval)) {
     header("Location: creator.php?error=" . urlencode("There were no evaluations found in the database."));
     exit();
 }
@@ -37,11 +37,11 @@ if (!$eval) {
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8 text-center">
-            <?php if ($eval->PublishEval) { ?>
-                <button class="btn btn-dark btn-lg" id="reeval"><a href="../unpublish.php">Hide Evaluation</a></button>
-            <?php } else { ?>
-                <button class="btn btn-dark btn-lg" id="reeval"><a href="../publish.php">Publish Evaluation</a></button>
-            <?php } ?>
+                <select class="custom-select">
+                <?php foreach($evals as $eval) { ?>
+                    <option value="<?= $eval->EvaluationID ?>"><?= $eval->CourseID . " | " . $eval->CourseTitle ?></option>
+                <?php  } ?>
+                </select>
             </div>
             <div class="col-md-2"></div>
         </div>

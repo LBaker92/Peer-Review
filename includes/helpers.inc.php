@@ -86,3 +86,18 @@ include 'config.inc.php';
         <?php } ?>
     </div>
 <?php } ?>
+
+
+<?php
+
+function getUserInfo($type, $email)
+{
+    $class = $type . "TableGateway";
+    if (class_exists($class)) {
+        $dbAdapter = DatabaseAdapterFactory::create('PDO', array(DBCONNECTION, DBUSER, DBPASS));
+        $gate = new $class($dbAdapter);
+        return $gate->findByEmail($email)->getFieldValues();
+    }
+}
+
+?>
