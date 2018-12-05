@@ -15,7 +15,7 @@ if (!empty($_SESSION['user'])) {
         }
         else {
             session_destroy();
-            header("Location: login.php");
+            header("Location: ../login.php");
             exit();
         }
     }
