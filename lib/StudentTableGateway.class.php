@@ -39,6 +39,12 @@ class StudentTableGateway extends TableDataGateway
         return $this->convertRecordsToObjects($this->dbAdapter->fetchAsArray($sql, $groupID));
     }
 
+    public function findByEvalID($evalID)
+    {
+        $sql = $this->getSelectStatement() . " WHERE EvaluationID = ?";
+        return $this->convertRecordsToObjects($this->dbAdapter->fetchAsArray($sql, $evalID));
+    }
+
     public function setGroupID($studentID, $id) 
     {
         $sql = "UPDATE " . $this->getTableName() . " SET GroupID = ? WHERE StudentID = ?";

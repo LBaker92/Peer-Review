@@ -106,6 +106,25 @@ if (empty($evals)) {
             </div>
             <div class="col-md-2"></div>
         </div>
+		
+		<div class="row mt-5">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 text-center">
+                <form action="../SendEmail/emailFront.php" method="post">
+                    <h3>Email List</h3>
+                    <div class="form-group">
+                        <select class="form-control" name="evalID" size="1">
+                        <?php foreach($evals as $eval) { ?>
+                            <option value="<?= $eval->EvaluationID ?>"><?= $eval->CourseID . " | " . $eval->CourseTitle ?></option>
+						<?php  } ?>
+                        </select>
+                    </div>
+                    <button class="btn btn-lg btn-dark" type="submit">Send Email to Students</button>
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+		
     </div>
     <script src="js/validation.js"></script>
 </body>

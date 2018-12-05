@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2018 at 01:48 AM
+-- Generation Time: Dec 05, 2018 at 12:11 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -48,7 +48,9 @@ CREATE TABLE `evaluations` (
 CREATE TABLE `finalgrades` (
   `StudentID` int(11) NOT NULL,
   `EvaluationID` int(11) NOT NULL,
-  `Email` varchar(255) NOT NULL,
+  `FirstName` varchar(255) NOT NULL,
+  `LastName` varchar(255) NOT NULL,
+  `Username` varchar(255) NOT NULL,
   `FinalGrade` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -124,7 +126,7 @@ CREATE TABLE `instructors` (
 --
 
 INSERT INTO `instructors` (`InstructorID`, `FirstName`, `LastName`, `Email`, `Password`) VALUES
-(1, 'Test', 'Test', 'testadmin@test.com', 'test');
+(1, 'Test', 'Admin', 'testadmin@test.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -180,8 +182,7 @@ ALTER TABLE `grades`
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
-  ADD PRIMARY KEY (`GroupID`),
-  ADD UNIQUE KEY `LeaderEmail` (`LeaderEmail`);
+  ADD PRIMARY KEY (`GroupID`);
 
 --
 -- Indexes for table `instructors`

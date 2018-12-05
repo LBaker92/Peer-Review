@@ -91,7 +91,15 @@ function convertToEmail($username)
 
 function generatePassword($row)
 {
-    return (string)($row[1] . $row[0] . rand(100, 999));
+    $password = $row[1] . $row[0];
+    $password = $password . rand(100, 999);
+    
+    // Generate 3 random characters from ASCII Table
+    // http://www.asciitable.com/
+    for ($i = 0; $i < 3; $i++) {
+        $password = $password . chr(rand(42, 47));
+    }
+    return (string)$password;
 }
 
 ?>
