@@ -143,7 +143,7 @@ $comment = $commentGate->findUniqueComment($_SESSION["user"]["StudentID"], $_SES
                         <?php if (!empty($comment)) { ?>
                         <textarea class="form-control" name="comment" cols="100%" rows="10"><?= $comment->Comments ?></textarea>
                         <?php } else { ?>
-                        <textarea name="comment" cols="100%" rows="10"></textarea>
+                        <textarea class="form-control" name="comment" cols="100%" rows="10"></textarea>
                         <?php } ?>
                     </div>
                     <div class="form-group text-center">
