@@ -2,10 +2,10 @@
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 06, 2018 at 02:43 AM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.11
+-- Host: localhost
+-- Generation Time: Dec 06, 2018 at 07:06 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -82,10 +82,10 @@ CREATE TABLE `gradecriteria` (
 --
 
 INSERT INTO `gradecriteria` (`Title`, `Description`) VALUES
-('Active Participation', 'Did he/she follow through on the project and being accountable to group members?'),
 ('Attendance', 'Did he/she attend group meetings or group activities?'),
 ('Communication', 'Did he/she communicate well with the group?'),
 ('Contribution', 'Did he/she improve the quality of work, being creative, bringing unique skills?'),
+('Participation', 'Did he/she follow through on the project and being accountable to group members?'),
 ('Supportiveness', 'Was he/she available to help other members?');
 
 -- --------------------------------------------------------

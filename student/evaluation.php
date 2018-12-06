@@ -25,13 +25,13 @@ else {
     exit();
 }
 
-if (!empty($_SESSION["user"]["graded"])) {
-    header("Location: grade.php");
+if (!$_SESSION["user"]["GroupID"]) {
+    header("Location: index.php");
     exit();
 }
 
-if (!$_SESSION["user"]["GroupID"]) {
-    header("Location: index.php");
+if ($_SESSION["user"]["CompletedEval"]) {
+    header("Location: grade.php");
     exit();
 }
 
@@ -65,11 +65,10 @@ $comment = $commentGate->findUniqueComment($_SESSION["user"]["StudentID"], $_SES
         <div class="row">
             <div class="col-md-12 table-responsive-md">
                 <h2 class="text-center mb-4">Evaluations</h2>
-                <a class="d-block text-center mb-4" href="../criteria.php">Click here to see the criteria details</a>
+                <h4><strong>Project Name:</strong> <?= $group->ProjectName ?></h4>
+                <p><strong>Project Description:</strong> <?= $group->ProjectDescription ?></p>
                 <form class="needs-validation" action="../lib/GradeValidator.php" method="post" novalidate>
-                    <h4>Project Name: <?= $group->ProjectName ?></h4>
-                    <p>Project Decription: <?= $group->ProjectDescription ?></p>
-                    <p class="d-inline"><strong>* You must enter values between 0-10.</strong></p>
+                    <p class="d-inline-block"><strong>* You must enter values between 0-10.</strong></p>
                     <?php if (!empty($_SESSION["errors"]["input"])) { ?>
                     <p class="form-alert mb-2">* <?= $_SESSION["errors"]["input"] ?></p>
                     <?php } ?>
@@ -116,7 +115,7 @@ $comment = $commentGate->findUniqueComment($_SESSION["user"]["StudentID"], $_SES
                                     <?php } ?>
                                     </td>
                                     <?php $gradeValueIndex++; ?>
-                                    <?php } else if (count($graded) > 0) { ?>
+                                    <?php } else if ($_SESSION["user"]["CompletedEval"]) { ?>
                                     <?php foreach($graded as $grade) { ?>
                                     <?php if ($grade->StudentID == $_SESSION["user"]["StudentID"]) { ?>
                                     <?php $title = (string)$criteria->Title; ?>
@@ -143,7 +142,7 @@ $comment = $commentGate->findUniqueComment($_SESSION["user"]["StudentID"], $_SES
                         <h5>Comments or Explanation for grades</h5>
                         <h5>(Optional)<h5>
                         <?php if (!empty($comment)) { ?>
-                        <textarea name="comment" cols="100%" rows="10"><?= $comment->Comments ?></textarea>
+                        <textarea class="form-control" name="comment" cols="100%" rows="10"><?= $comment->Comments ?></textarea>
                         <?php } else { ?>
                         <textarea name="comment" cols="100%" rows="10"></textarea>
                         <?php } ?>

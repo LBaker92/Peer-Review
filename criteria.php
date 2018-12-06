@@ -1,6 +1,11 @@
 <?php
 include "includes/helpers.inc.php";
 session_start();
+
+if (empty($_SESSION['user'])) {
+    header("Location: ../login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,11 +14,15 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Criteria Details</title>
     <?php insertLinks(); ?>
 </head>
 <body>
+    <?php if ($_SESSION["user"]["admin"]) { ?>
+    <?php insertAdminNavbar(); ?>
+    <?php } else { ?>
     <?php insertNavbar(); ?>
+    <?php } ?>
     <div class="container">
         <div class="row"></div>
         <div class="row mt-5">
