@@ -67,7 +67,7 @@ else { $letterGrade = "F"; }
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Language" content="en">
-    <title>Evaluation</title>
+    <title>Grade Page</title>
     <?php insertLinks(); ?>
     <link rel="stylesheet" href="../css/style.css">
 </head>
