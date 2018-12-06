@@ -6,6 +6,7 @@ unset($_SESSION["errors"]["title"]);
 unset($_SESSION["errors"]["description"]);
 unset($_SESSION["errors"]["leader"]);
 unset($_SESSION["errors"]["memberIDs"]);
+unset($_SESSION["errors"]["included"]);
 ?>
 
 <?php
@@ -38,8 +39,8 @@ unset($_SESSION["errors"]["memberIDs"]);
                 }
             }
 
-            if (count($_POST["memberIDs"]) > 5) {
-                $_SESSION["errors"]["memberIDs"] = "You selected more than 5 group members.";
+            if (count($_POST["memberIDs"]) > $MAX_GROUP_SIZE) {
+                $_SESSION["errors"]["memberIDs"] = "You selected more than " . $MAX_GROUP_SIZE . " group members.";
             }
 
             $leaderSelected = false;

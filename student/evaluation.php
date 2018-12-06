@@ -39,11 +39,13 @@ $groupGate = new GroupTableGateway($dbAdapter);
 $studentGate = new StudentTableGateway($dbAdapter);
 $criteriaGate = new GradeCriteriaTableGateway($dbAdapter);
 $gradeGate = new GradeTableGateway($dbAdapter);
+$commentGate = new CommentTableGateway($dbAdapter);
 
 $group = $groupGate->findById($_SESSION["user"]["GroupID"]);
 $students = $studentGate->findByGroupID($group->GroupID);
 $criterias = $criteriaGate->findAll();
 $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
+$comment = $commentGate->findUniqueComment($_SESSION["user"]["StudentID"], $_SESSION["user"]["EvaluationID"]);
 ?>
 
 <!DOCTYPE html>
@@ -63,6 +65,7 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
         <div class="row">
             <div class="col-md-12 table-responsive-md">
                 <h2 class="text-center mb-4">Evaluations</h2>
+                <a class="d-block text-center mb-4" href="../criteria.php">Click here to see the criteria details</a>
                 <form class="needs-validation" action="../lib/GradeValidator.php" method="post" novalidate>
                     <h4><?= $group->ProjectName ?></h4>
                     <p><?= $group->ProjectDescription ?></p>
@@ -106,14 +109,12 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                                         <input class="form-control is-valid" type="number" 
                                             name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
                                             min="0" max="10" value="<?= $_SESSION["grades"][$gradeValueIndex] ?>">
-                                    </td>
                                     <?php } else { ?>
-                                    <td>
                                         <input class="form-control is-invalid" type="number" 
                                             name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
                                             min="0" max="10">
-                                    </td>
                                     <?php } ?>
+                                    </td>
                                     <?php $gradeValueIndex++; ?>
                                     <?php } else if (count($graded) > 0) { ?>
                                     <?php foreach($graded as $grade) { ?>
@@ -127,7 +128,8 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                                            <?php } ?>
                                       <?php  } ?>
                                     <?php } else { ?>
-                                    <td><input class="form-control" 
+                                    <td>
+                                        <input class="form-control" 
                                                 type="number" name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
                                                 min="0" max="10">
                                     </td>
@@ -137,7 +139,15 @@ $graded = $gradeGate->findByGraderID($_SESSION["user"]["StudentID"]);
                             </tbody>
                         </table>
                     <?php } ?>
-                    <?php unset($_SESSION["grades"]); ?>
+                    <div class="form-group text-center">
+                        <h5>Comments or Explanation for grades</h5>
+                        <h5>(Optional)<h5>
+                        <?php if (!empty($comment)) { ?>
+                        <textarea name="comment" cols="100%" rows="10"><?= $comment->Comments ?></textarea>
+                        <?php } else { ?>
+                        <textarea name="comment" cols="100%" rows="10"></textarea>
+                        <?php } ?>
+                    </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-lg btn-block btn-dark mt-4">Submit</button>
                     </div>

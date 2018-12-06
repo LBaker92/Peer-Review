@@ -3,6 +3,7 @@ include "../includes/helpers.inc.php";
 session_start();
 
 unset($_SESSION["errors"]["input"]);
+unset($_SESSION["grades"]);
 
 $groupGate = new GroupTableGateway($dbAdapter);
 $studentGate = new StudentTableGateway($dbAdapter);
@@ -18,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach($_POST as $grades) {
         // Loop through the single values stored in each person's evaluation
         foreach($grades as $grade) {
-            if (empty($grade || $grade < 0 || $grade > 10)) {
+            if (empty($grade) || $grade < 0 || $grade > 10) {
                 $_SESSION["errors"]["input"] = "Make sure to fill all fields with values between 0 - 10";
             }
             if ($grade < 0 || $grade > 10) {
@@ -111,6 +112,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         else {
             $finalGradeGate->insert($finalGrade);
+        }
+
+        if (!empty($_POST["comment"])) {
+            $commentGate = new CommentTableGateway($dbAdapter);
+            $comment = new Comment(array("GraderID" => $_SESSION["user"]["StudentID"],
+                                         "EvaluationID" => $_SESSION["user"]["EvaluationID"],
+                                         "Comments" => $_POST["comment"]
+                                        ), false);
+            
+            $oldComment = $commentGate->findUniqueComment($_SESSION["user"]["StudentID"], $_SESSION["user"]["EvaluationID"]);
+            if (!$oldComment) {
+                $commentGate->insert($comment);
+            }
+            else {
+                $commentGate->update($comment);
+            }
         }
     }
 
