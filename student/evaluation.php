@@ -67,8 +67,8 @@ $comment = $commentGate->findUniqueComment($_SESSION["user"]["StudentID"], $_SES
                 <h2 class="text-center mb-4">Evaluations</h2>
                 <a class="d-block text-center mb-4" href="../criteria.php">Click here to see the criteria details</a>
                 <form class="needs-validation" action="../lib/GradeValidator.php" method="post" novalidate>
-                    <h4><?= $group->ProjectName ?></h4>
-                    <p><?= $group->ProjectDescription ?></p>
+                    <h4>Project Name: <?= $group->ProjectName ?></h4>
+                    <p>Project Decription: <?= $group->ProjectDescription ?></p>
                     <p class="d-inline"><strong>* You must enter values between 0-10.</strong></p>
                     <?php if (!empty($_SESSION["errors"]["input"])) { ?>
                     <p class="form-alert mb-2">* <?= $_SESSION["errors"]["input"] ?></p>
