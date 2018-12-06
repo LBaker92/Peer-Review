@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2018 at 12:11 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: Dec 06, 2018 at 02:43 AM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `peer_reviews`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `GraderID` int(11) NOT NULL,
+  `EvaluationID` int(11) NOT NULL,
+  `Comments` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -70,10 +82,10 @@ CREATE TABLE `gradecriteria` (
 --
 
 INSERT INTO `gradecriteria` (`Title`, `Description`) VALUES
-('Attendance', 'Did he/she attend group meetings?'),
+('Active Participation', 'Did he/she follow through on the project and being accountable to group members?'),
+('Attendance', 'Did he/she attend group meetings or group activities?'),
 ('Communication', 'Did he/she communicate well with the group?'),
-('Contribution', 'Did he/she contribute to the project?'),
-('Participation', 'Did he/she participate in group conversation?'),
+('Contribution', 'Did he/she improve the quality of work, being creative, bringing unique skills?'),
 ('Supportiveness', 'Was he/she available to help other members?');
 
 -- --------------------------------------------------------
@@ -126,7 +138,7 @@ CREATE TABLE `instructors` (
 --
 
 INSERT INTO `instructors` (`InstructorID`, `FirstName`, `LastName`, `Email`, `Password`) VALUES
-(1, 'Test', 'Admin', 'testadmin@test.com', 'test');
+(1, 'Test', 'Test', 'testadmin@test.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -148,6 +160,13 @@ CREATE TABLE `students` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`GraderID`,`EvaluationID`),
+  ADD KEY `fk_evaluation` (`EvaluationID`);
 
 --
 -- Indexes for table `evaluations`
@@ -236,6 +255,13 @@ ALTER TABLE `students`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `fk_evaluation` FOREIGN KEY (`EvaluationID`) REFERENCES `evaluations` (`EvaluationID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_grader` FOREIGN KEY (`GraderID`) REFERENCES `students` (`StudentID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `evaluations`
