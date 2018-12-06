@@ -115,17 +115,15 @@ $comment = $commentGate->findUniqueComment($_SESSION["user"]["StudentID"], $_SES
                                     <?php } ?>
                                     </td>
                                     <?php $gradeValueIndex++; ?>
-                                    <?php } else if ($_SESSION["user"]["CompletedEval"]) { ?>
-                                    <?php foreach($graded as $grade) { ?>
-                                    <?php if ($grade->StudentID == $_SESSION["user"]["StudentID"]) { ?>
-                                    <?php $title = (string)$criteria->Title; ?>
+                                    <?php } else if (!$_SESSION["user"]["CompletedEval"]) { ?>
+                                    <?php if (!empty($graded)) { ?>
+                                        <?php foreach($graded as $grade) { ?>
+                                            <?php $title = (string)$criteria->Title; ?>
                                     <td>
                                         <input class="form-control" type="number" 
                                             name="<?= $student->StudentID ?>[<?= $criteria->Title ?>]" 
                                             min="0" max="10" value="<?= $grade->$title ?>">
-                                    </td>
-                                           <?php } ?>
-                                      <?php  } ?>
+                                      <?php } ?>
                                     <?php } else { ?>
                                     <td>
                                         <input class="form-control" 
@@ -134,6 +132,7 @@ $comment = $commentGate->findUniqueComment($_SESSION["user"]["StudentID"], $_SES
                                     </td>
                                     <?php } ?>
                                 <?php } ?>
+                      <?php } ?>
                                 </tr>
                             </tbody>
                         </table>
